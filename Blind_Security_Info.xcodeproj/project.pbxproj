@@ -13,6 +13,7 @@
 		04AD80871F472A10001D0A0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AD80851F472A10001D0A0C /* Main.storyboard */; };
 		04AD80891F472A10001D0A0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AD80881F472A10001D0A0C /* Assets.xcassets */; };
 		04AD808C1F472A10001D0A0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04AD808A1F472A10001D0A0C /* LaunchScreen.storyboard */; };
+		04C6C1A31F567A3B00A9336E /* Blind_Security_Info.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04C6C1A11F567A3B00A9336E /* Blind_Security_Info.xcdatamodeld */; };
 		DFDD1BE1142B30D8DB2F6EAB /* Pods_Blind_Security_Info.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166B2933953AB4991AF29D9E /* Pods_Blind_Security_Info.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		04AD80881F472A10001D0A0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04AD808B1F472A10001D0A0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04AD808D1F472A10001D0A0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04C6C1A21F567A3B00A9336E /* Blind_Security_Info.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blind_Security_Info.xcdatamodel; sourceTree = "<group>"; };
 		166B2933953AB4991AF29D9E /* Pods_Blind_Security_Info.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blind_Security_Info.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB54561DE2B09441230B3EF /* Pods-Blind_Security_Info.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blind_Security_Info.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blind_Security_Info/Pods-Blind_Security_Info.release.xcconfig"; sourceTree = "<group>"; };
 		EFF2182A7EB2868DC9974207 /* Pods-Blind_Security_Info.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blind_Security_Info.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Blind_Security_Info/Pods-Blind_Security_Info.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				04AD80881F472A10001D0A0C /* Assets.xcassets */,
 				04AD808A1F472A10001D0A0C /* LaunchScreen.storyboard */,
 				04AD808D1F472A10001D0A0C /* Info.plist */,
+				04C6C1A11F567A3B00A9336E /* Blind_Security_Info.xcdatamodeld */,
 			);
 			path = Blind_Security_Info;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			files = (
 				04AD80841F472A10001D0A0C /* SecondViewController.swift in Sources */,
 				04AD80801F472A10001D0A0C /* AppDelegate.swift in Sources */,
+				04C6C1A31F567A3B00A9336E /* Blind_Security_Info.xcdatamodeld in Sources */,
 				04AD80821F472A10001D0A0C /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,8 +394,22 @@
 				04AD80921F472A11001D0A0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		04C6C1A11F567A3B00A9336E /* Blind_Security_Info.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				04C6C1A21F567A3B00A9336E /* Blind_Security_Info.xcdatamodel */,
+			);
+			currentVersion = 04C6C1A21F567A3B00A9336E /* Blind_Security_Info.xcdatamodel */;
+			path = Blind_Security_Info.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 04AD80741F472A10001D0A0C /* Project object */;
 }

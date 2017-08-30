@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Blind_Security_Info/SecurityInfo+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Blind_Security_Info/SecurityInfo+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:SecurityInfo+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
       location = "group:Blind_Security_Info.xcodeproj">
    </FileRef>
    <FileRef
