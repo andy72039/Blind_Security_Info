@@ -11,7 +11,7 @@ import CoreLocation
 
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     var locationManager: CLLocationManager = CLLocationManager()
-//    var currLocation: CLLocationManager
+    //    var currLocation: CLLocationManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,29 +19,29 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         view.addSubview(button)
         view.addSubview(label)
         view.setNeedsUpdateConstraints()
-
         
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-            print("Start updating")
+        locationManager.startUpdatingLocation()
+        print("Start updating")
     }
-
-//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [CLLocation]) {
+    
+    //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [CLLocation]) {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print(locations.count)
+        //        print(locations.count)
         let newLocation: CLLocation = locations.last!
         reverseGeocodeCoordinate(coordinate: newLocation.coordinate)
     }
     
-//    func locationManager(manager: CLLocationManager!, didFailWithError error: Error!)
+    //    func locationManager(manager: CLLocationManager!, didFailWithError error: Error!)
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error Occurs")
         print(error)
     }
-
+    
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(coordinate) { response, error in
@@ -52,11 +52,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     func buttonPressed() {
-//        var coord = locationManager.location?.coordinate
-//        label.text = "\(coord?.latitude)"
+                let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
+//                nextViewController.lat =
+//                nextViewController.lon = newLocation.coordinate.longitude
 //        
+             self.navigationController?.pushViewController(nextViewController, animated: false)
     }
-
+    
     override func updateViewConstraints() {
         buttonConstraints()
         labelConstraints()
@@ -142,7 +144,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     lazy var label: UILabel! = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.text = "Hello world!"
+        //        view.text = "Hello world!"
         view.textAlignment = .center
         view.numberOfLines = 0
         return view
