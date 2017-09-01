@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddInfoViewController: UIViewController, UITextViewDelegate {
+class AddInfoViewController: UIViewController, UITextFieldDelegate {
 
     var lat: Double = 0.0
     var lon: Double = 0.0
@@ -146,7 +146,7 @@ class AddInfoViewController: UIViewController, UITextViewDelegate {
         
     }
 
-    func CancelButtonConstraints() {
+    func cancelButtonConstraints() {
         NSLayoutConstraint(
             item: cancelButton,
             attribute: .centerX,

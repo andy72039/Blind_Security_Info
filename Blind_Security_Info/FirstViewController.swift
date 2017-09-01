@@ -52,11 +52,14 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     func buttonPressed() {
-                let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
+//                let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
 //                nextViewController.lat =
 //                nextViewController.lon = newLocation.coordinate.longitude
 //        
-             self.navigationController?.pushViewController(nextViewController, animated: false)
+//             self.navigationController?.pushViewController(nextViewController, animated: false)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
+        self.present(nextViewController, animated: false, completion: nil)
     }
     
     override func updateViewConstraints() {

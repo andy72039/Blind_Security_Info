@@ -87,6 +87,23 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
+        <!--AddInfoViewController-->
+        <scene sceneID="Ayb-ho-FDv">
+            <objects>
+                <viewController storyboardIdentifier="AddInfoViewController" id="8tE-Hl-UHZ" userLabel="AddInfoViewController" customClass="AddInfoViewController" customModule="Blind_Security_Info" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UpW-10-ewB"/>
+                        <viewControllerLayoutGuide type="bottom" id="P7d-M1-B1T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wdl-Fm-mhK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J9f-wH-ulS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
