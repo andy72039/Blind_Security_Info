@@ -13,13 +13,40 @@ import GoogleMaps
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
     var window: UIWindow?
-
+    var firstViewController: FirstViewController?
+    var secondViewController: SecondViewController?
+    var thirdViewController: ThirdViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBj8TV99Fwvg9O1NrQjOIkLWEz8b2jxmp8")
 
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        self.firstViewController = FirstViewController()
+        self.secondViewController = SecondViewController()
+        self.thirdViewController = ThirdViewController()
+        
+        var tabBarController = UITabBarController()
+        tabBarController.viewControllers = [firstViewController!, secondViewController!, thirdViewController!]
+        
+        let item1 = UITabBarItem(title: "Navigation", image: nil, tag: 0)
+        let item2 = UITabBarItem(title: "Info", image: nil, tag: 1)
+        let item3 = UITabBarItem(title: "Settings", image: nil, tag: 2)
+        
+        //defining the items of the TabBar corresponding to three views
+        self.firstViewController?.tabBarItem = item1
+        self.secondViewController?.tabBarItem = item2
+        self.thirdViewController?.tabBarItem = item3
+        
+        //setting TabBarItems corresponding to each view in TabBarController
+        self.window?.rootViewController = tabBarController
+        
+        //setting the initial VieController as tabBarController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

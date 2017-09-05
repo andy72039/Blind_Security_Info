@@ -11,8 +11,11 @@ import CoreLocation
 
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     var locationManager: CLLocationManager = CLLocationManager()
-    //    var currLocation: CLLocationManager
     
+    convenience init() {
+        self.init(nibName: "FirstViewController", bundle: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,11 +60,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 //                nextViewController.lon = newLocation.coordinate.longitude
 //        
 //             self.navigationController?.pushViewController(nextViewController, animated: false)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
         self.present(nextViewController, animated: false, completion: nil)
     }
-    
+
     override func updateViewConstraints() {
         buttonConstraints()
         labelConstraints()

@@ -1,15 +1,15 @@
 //
 //  AddInfoViewController.swift
-//  Blind_Security_Info
+//  
 //
-//  Created by Nick on 31/08/2017.
-//  Copyright © 2017 Nick. All rights reserved.
+//  Created by Nick on 05/09/2017.
+//
 //
 
 import UIKit
 
 class AddInfoViewController: UIViewController, UITextFieldDelegate {
-
+    
     var lat: Double = 0.0
     var lon: Double = 0.0
     
@@ -21,12 +21,12 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(textField)
         view.addSubview(cancelButton)
         view.addSubview(saveButton)
-//        view.addSubview(label)
+        //        view.addSubview(label)
         view.setNeedsUpdateConstraints()
     }
     
     func saveButtonPressed() {
-//        label.text = "Hello, \(textField.text!)"
+        //        label.text = "Hello, \(textField.text!)"
     }
     
     func cancelButtonPressed() {
@@ -145,7 +145,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
         
     }
-
+    
     func cancelButtonConstraints() {
         NSLayoutConstraint(
             item: cancelButton,
@@ -178,7 +178,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
         
     }
-
+    
     lazy var textField: UITextField! = {
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +207,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor.blue
         return view
     }()
- 
+    
     lazy var label: UILabel! = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false

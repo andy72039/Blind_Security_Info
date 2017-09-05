@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Blind_Security_Info/AddInfoViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:Blind_Security_Info.xcodeproj">
    </FileRef>
    <FileRef
