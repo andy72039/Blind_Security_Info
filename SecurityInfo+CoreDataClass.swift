@@ -1,9 +1,9 @@
 //
 //  SecurityInfo+CoreDataClass.swift
-//  Blind_Security_Info
+//  
 //
-//  Created by Nick on 31/08/2017.
-//  Copyright © 2017 Nick. All rights reserved.
+//  Created by Nick on 07/09/2017.
+//
 //
 
 import Foundation

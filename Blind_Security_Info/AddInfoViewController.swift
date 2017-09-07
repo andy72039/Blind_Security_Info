@@ -1,6 +1,6 @@
 //
 //  AddInfoViewController.swift
-//  
+//
 //
 //  Created by Nick on 05/09/2017.
 //
@@ -13,6 +13,10 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
     var lat: Double = 0.0
     var lon: Double = 0.0
     
+    convenience init() {
+        self.init(nibName: "AddInfoViewController", bundle: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self

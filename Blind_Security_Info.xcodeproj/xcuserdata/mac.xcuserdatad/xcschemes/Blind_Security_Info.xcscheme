@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "04AD807B1F472A10001D0A0C"
+               BlueprintIdentifier = "040B36BD1F610ACB0000996D"
                BuildableName = "Blind_Security_Info.app"
                BlueprintName = "Blind_Security_Info"
                ReferencedContainer = "container:Blind_Security_Info.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "04AD807B1F472A10001D0A0C"
+            BlueprintIdentifier = "040B36BD1F610ACB0000996D"
             BuildableName = "Blind_Security_Info.app"
             BlueprintName = "Blind_Security_Info"
             ReferencedContainer = "container:Blind_Security_Info.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "04AD807B1F472A10001D0A0C"
+            BlueprintIdentifier = "040B36BD1F610ACB0000996D"
             BuildableName = "Blind_Security_Info.app"
             BlueprintName = "Blind_Security_Info"
             ReferencedContainer = "container:Blind_Security_Info.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "04AD807B1F472A10001D0A0C"
+            BlueprintIdentifier = "040B36BD1F610ACB0000996D"
             BuildableName = "Blind_Security_Info.app"
             BlueprintName = "Blind_Security_Info"
             ReferencedContainer = "container:Blind_Security_Info.xcodeproj">

@@ -1,6 +1,5 @@
 //  FirstViewController.swift
 //  Blind_Security_Info
-//
 //  Created by Nick on 18/08/2017.
 //  Copyright © 2017 Nick. All rights reserved.
 //
@@ -15,7 +14,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     convenience init() {
         self.init(nibName: "FirstViewController", bundle: nil)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +31,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         print("Start updating")
     }
     
-    //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [CLLocation]) {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //        print(locations.count)
         let newLocation: CLLocation = locations.last!
@@ -55,16 +53,19 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     func buttonPressed() {
-//                let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
-//                nextViewController.lat =
-//                nextViewController.lon = newLocation.coordinate.longitude
-//        
-//             self.navigationController?.pushViewController(nextViewController, animated: false)
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
+        //                let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
+        //                nextViewController.lat =
+        //                nextViewController.lon = newLocation.coordinate.longitude
+        //
+        //             self.navigationController?.pushViewController(nextViewController, animated: false)
+        locationManager.stopUpdatingLocation()
+//        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
+        let nextViewController = ViewController(nibName: "AddInfoViewController", bundle: nil)
         self.present(nextViewController, animated: false, completion: nil)
+        
     }
-
+    
     override func updateViewConstraints() {
         buttonConstraints()
         labelConstraints()
