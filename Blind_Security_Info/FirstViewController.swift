@@ -10,6 +10,9 @@ import CoreLocation
 
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     var locationManager: CLLocationManager = CLLocationManager()
+//    var currLat: double = 0.0
+//    var currLon: double = 0.0
+    var newLocation: CLLocation = CLLocation()
     
     convenience init() {
         self.init(nibName: "FirstViewController", bundle: nil)
@@ -28,12 +31,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        print("Start updating")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //        print(locations.count)
-        let newLocation: CLLocation = locations.last!
+//        let newLocation: CLLocation = locations.last!
+        newLocation = locations.last!
         reverseGeocodeCoordinate(coordinate: newLocation.coordinate)
     }
     
@@ -52,18 +55,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
     }
+
     func buttonPressed() {
-        //                let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
-        //                nextViewController.lat =
-        //                nextViewController.lon = newLocation.coordinate.longitude
-        //
-        //             self.navigationController?.pushViewController(nextViewController, animated: false)
         locationManager.stopUpdatingLocation()
 //        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
-        let nextViewController = ViewController(nibName: "AddInfoViewController", bundle: nil)
+        let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
+        nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
+            nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
         self.present(nextViewController, animated: false, completion: nil)
-        
     }
     
     override func updateViewConstraints() {
