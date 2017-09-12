@@ -29,7 +29,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         setupView()
-        print("\(lat), \(lon)")
+//        print("\(lat), \(lon)")
     }
     
     func saveButtonPressed() {
