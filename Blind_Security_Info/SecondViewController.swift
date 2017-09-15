@@ -9,10 +9,13 @@
 import UIKit
 import CoreData
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
-    
+    var myTableView: UITableView!
+    var tableArray: NSMutableArray! = NSMutableArray()
+    let sections = [""]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -22,20 +25,24 @@ class SecondViewController: UIViewController {
         var infos = [SecurityInfo]()
         infos = SecurityInfos.sharedinstance.getAllInfo()
 //        print(infos)
-//        print(infos[infos.count-1].latitude)
+//        print(infos[infos.count-1].infoContent)
+        
+        for si in infos {
+            tableArray.add(from: si.infoContent)
+        }
+//        print(tableArray)
+//        print(tableArray[tableArray.count-1])
+
     }
     
     override func updateViewConstraints() {
         headerViewConstraints()
         titleLabelConstraints()
+        myTableViewConstraints()
         super.updateViewConstraints()
     }
     
     func headerViewConstraints() {
-        //        headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        //        headerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        //        headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1.0).isActive = true
-        //        headerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
         NSLayoutConstraint(
             item: headerView,
             attribute: .centerX,
@@ -69,11 +76,54 @@ class SecondViewController: UIViewController {
         NSLayoutConstraint(
             item: headerView,
             attribute: .height,
-            relatedBy: .equal,            toItem: self.view,
+            relatedBy: .equal,
+            toItem: view,
             attribute: .height,
             multiplier: 0.2,
             constant: 0.0)
             .isActive = true
+    }
+    
+    func myTableViewConstraints() {
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 1.0,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: headerView,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .bottom,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 0.0)
+        .isActive = true
     }
     
     func titleLabelConstraints() {
@@ -106,9 +156,39 @@ class SecondViewController: UIViewController {
             multiplier: 1.0,
             constant: 0.0)
             .isActive = true
-        
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return tableArray.count
+    }
+
+    // return cells
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        
+        if indexPath.section == 0 {
+            cell.labelOne.text = "\(tableArray[indexPath.row])"
+            //            cell.labelTwo.text = "Message \(indexPath.row)"
+            //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
+        }
+        return cell
+    }
+    
+    // Session
+    //
+    //
+    
+    // return the number of sections
+    func numberOfSections(in tableView: UITableView) -> Int{
+        return sections.count
+    }
+    
+    // return the title of sections
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section] as? String
+    }
+
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
@@ -117,7 +197,16 @@ class SecondViewController: UIViewController {
         titleLabel.text = "My All Info"
         titleLabel.textAlignment = .center
         
+        myTableView = UITableView()
+        myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.dataSource = self
+        myTableView.delegate = self
+        myTableView.rowHeight = UITableViewAutomaticDimension
+        myTableView.estimatedRowHeight = 44
+
         self.view.addSubview(headerView)
+        self.view.addSubview(myTableView)
         headerView.addSubview(titleLabel)
         self.view.setNeedsUpdateConstraints()
     }
