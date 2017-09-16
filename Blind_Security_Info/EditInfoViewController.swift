@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class EditInfoViewController: UIViewController, UITextFieldDelegate {
     var lat: Double = 0.0
     var lon: Double = 0.0
+    var infoID: NSManagedObjectID = NSManagedObjectID()
+    var infoText: String = ""
     
     var headerView: UIView! = UIView()
     var textField: UITextField! = UITextField()
@@ -45,7 +48,8 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     func deleteButtonPressed() {
-        
+        SecurityInfos.sharedinstance.deleteInfo(infoID: infoID)
+        dismiss(animated: false, completion: nil)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -278,6 +282,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.textAlignment = .center
+        textField.text = infoText
         
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action:#selector(saveButtonPressed), for: .touchUpInside)

@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class SecurityInfos {
     static let sharedinstance = SecurityInfos()
@@ -34,4 +35,18 @@ class SecurityInfos {
         
         return infos
     }
+    
+    func deleteInfo(infoID: NSManagedObjectID) {
+        do {
+            infos =  try context.fetch(SecurityInfo.fetchRequest())
+        } catch {
+            print("Error fetching datafrom CoreData")
+        }
+        for info in infos {
+            if info.objectID == infoID {
+                context.delete(info)
+            }
+        }
+    }
+
 }

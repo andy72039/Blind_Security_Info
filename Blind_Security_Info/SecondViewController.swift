@@ -13,7 +13,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
     var myTableView: UITableView!
-    var tableArray: NSMutableArray! = NSMutableArray()
+
+    var infos = [SecurityInfo]()
+    var infoArray: NSMutableArray! = NSMutableArray()
+    var IDArray: NSMutableArray! = NSMutableArray()
     let sections = [""]
 
     override func viewDidLoad() {
@@ -22,13 +25,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 //        print("2nd ViewController")
 //        SecurityInfos.sharedinstance.addInfo(latitude: -24.1424, longitude: 12.1358, infoContent: "Be careful to a hole.")
-        var infos = [SecurityInfo]()
         infos = SecurityInfos.sharedinstance.getAllInfo()
 //        print(infos)
 //        print(infos[infos.count-1].infoContent)
-        
+
         for si in infos {
-            tableArray.add(from: si.infoContent)
+            infoArray.add(from: si.infoContent)
+            IDArray.add(si.objectID)
         }
 //        print(tableArray)
 //        print(tableArray[tableArray.count-1])
@@ -159,7 +162,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return tableArray.count
+            return infoArray.count
     }
 
     // return cells
@@ -168,7 +171,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         
         if indexPath.section == 0 {
-            cell.labelOne.text = "\(tableArray[indexPath.row])"
+            cell.labelOne.text = "\(infoArray[indexPath.row])"
             //            cell.labelTwo.text = "Message \(indexPath.row)"
             //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
         }
@@ -191,10 +194,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
-//        nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
-//        nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
+        nextViewController.infoText = infos[indexPath.row].infoContent!
+        nextViewController.infoID = infos[indexPath.row].objectID
         self.present(nextViewController, animated: false, completion: nil)
-        
     }
 
     func setupView() {
