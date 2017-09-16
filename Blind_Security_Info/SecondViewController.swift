@@ -189,6 +189,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return sections[section] as? String
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
+//        nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
+//        nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
+        self.present(nextViewController, animated: false, completion: nil)
+        
+    }
+
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
@@ -204,6 +212,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myTableView.delegate = self
         myTableView.rowHeight = UITableViewAutomaticDimension
         myTableView.estimatedRowHeight = 44
+        myTableView.allowsSelection = true
 
         self.view.addSubview(headerView)
         self.view.addSubview(myTableView)

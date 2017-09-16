@@ -1,14 +1,14 @@
 //
-//  AddInfoViewController.swift
+//  EditInfoViewController.swift
+//  Blind_Security_Info
 //
-//
-//  Created by Nick on 05/09/2017.
-//
+//  Created by Nick on 16/09/2017.
+//  Copyright © 2017 Nick. All rights reserved.
 //
 
 import UIKit
 
-class AddInfoViewController: UIViewController, UITextFieldDelegate {
+class EditInfoViewController: UIViewController, UITextFieldDelegate {
     var lat: Double = 0.0
     var lon: Double = 0.0
     
@@ -17,32 +17,37 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
     var saveButton: UIButton! = UIButton()
     var cancelButton: UIButton! = UIButton()
     var titleLabel: UILabel! = UILabel()
-
+    var deleteButton: UIButton! = UIButton()
+    
     convenience init() {
-        self.init(nibName: "AddInfoViewController", bundle: nil)
+        self.init(nibName: "EditInfoViewController", bundle: nil)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
-
+        
         // Do any additional setup after loading the view.
         setupView()
-//        print("\(lat), \(lon)")
+        //        print("\(lat), \(lon)")
     }
     
     func saveButtonPressed() {
-        if !(textField.text?.isEmpty)! {
-            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoContent: textField.text!)
-            dismiss(animated: false, completion: nil)
-        }
+//        if !(textField.text?.isEmpty)! {
+//            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoContent: textField.text!)
+//            dismiss(animated: false, completion: nil)
+//        }
     }
     
     func cancelButtonPressed() {
-//        _ = navigationController?.popViewController(animated: true)
+        //        _ = navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
+    func deleteButtonPressed() {
+        
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
@@ -54,14 +59,15 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         saveButtonConstraints()
         cancelButtonConstraints()
         titleLabelConstraints()
+        deleteButtonConstraints()
         super.updateViewConstraints()
     }
-
+    
     func headerViewConstraints() {
-//        headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-//        headerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-//        headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1.0).isActive = true
-//        headerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
+        //        headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        //        headerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        //        headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1.0).isActive = true
+        //        headerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
         NSLayoutConstraint(
             item: headerView,
             attribute: .centerX,
@@ -82,7 +88,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             constant: 0.0
             )
             .isActive = true
-
+        
         NSLayoutConstraint(
             item: headerView,
             attribute: .top,
@@ -99,9 +105,9 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             attribute: .height,
             multiplier: 0.2,
             constant: 0.0)
-        .isActive = true
+            .isActive = true
     }
-
+    
     func textFieldConstraints() {
         NSLayoutConstraint(
             item: textField,
@@ -232,31 +238,69 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             constant: 0.0)
             .isActive = true
     }
-    
+    func deleteButtonConstraints() {
+        NSLayoutConstraint(
+            item: deleteButton,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: deleteButton,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 0.8,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: deleteButton,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .bottom,
+            multiplier: 0.8,
+            constant: 0.0)
+            .isActive = true
+    }
+
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
-
-      textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.textAlignment = .center
-
+        
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action:#selector(saveButtonPressed), for: .touchUpInside)
         saveButton.setTitle("Save Info", for: .normal)
         saveButton.backgroundColor = UIColor.blue
-
+        
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action:#selector(cancelButtonPressed), for: .touchUpInside)
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.backgroundColor = UIColor.blue
         
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.addTarget(self, action:#selector(deleteButtonPressed), for: .touchUpInside)
+        deleteButton.setTitle("Delete This Info", for: .normal)
+        deleteButton.backgroundColor = UIColor.blue
+
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Add Your Info"
+        titleLabel.text = "Edit Your Info"
         titleLabel.textAlignment = .center
 
         self.view.addSubview(headerView)
         self.view.addSubview(textField)
+            self.view.addSubview(deleteButton)
         headerView.addSubview(cancelButton)
         headerView.addSubview(saveButton)
         headerView.addSubview(titleLabel)

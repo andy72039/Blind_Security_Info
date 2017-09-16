@@ -22,6 +22,8 @@
 		04695B7B1F610DE000345F4D /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04695B791F610DE000345F4D /* ThirdViewController.swift */; };
 		04695B7C1F610DE000345F4D /* ThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04695B7A1F610DE000345F4D /* ThirdViewController.xib */; };
 		047B289D1F6B6CA1008A7151 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */; };
+		0494574A1F6CCCC5002920CC /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049457481F6CCCC5002920CC /* EditInfoViewController.swift */; };
+		0494574B1F6CCCC5002920CC /* EditInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049457491F6CCCC5002920CC /* EditInfoViewController.xib */; };
 		98C64E5A07D4F932B3B8B7C5 /* Pods_Blind_Security_Info.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FAA1AA378BDE4245412B9F /* Pods_Blind_Security_Info.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		04695B791F610DE000345F4D /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThirdViewController.swift; path = Blind_Security_Info/ThirdViewController.swift; sourceTree = "<group>"; };
 		04695B7A1F610DE000345F4D /* ThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ThirdViewController.xib; path = Blind_Security_Info/ThirdViewController.xib; sourceTree = "<group>"; };
 		047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = Blind_Security_Info/CustomTableViewCell.swift; sourceTree = "<group>"; };
+		049457481F6CCCC5002920CC /* EditInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditInfoViewController.swift; path = Blind_Security_Info/EditInfoViewController.swift; sourceTree = "<group>"; };
+		049457491F6CCCC5002920CC /* EditInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditInfoViewController.xib; path = Blind_Security_Info/EditInfoViewController.xib; sourceTree = "<group>"; };
 		45FAA1AA378BDE4245412B9F /* Pods_Blind_Security_Info.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blind_Security_Info.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD49901034E14EEC6432446 /* Pods-Blind_Security_Info.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blind_Security_Info.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Blind_Security_Info/Pods-Blind_Security_Info.debug.xcconfig"; sourceTree = "<group>"; };
 		86CCE0186306377C85F207F7 /* Pods-Blind_Security_Info.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blind_Security_Info.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blind_Security_Info/Pods-Blind_Security_Info.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				04695B711F610D9000345F4D /* FirstViewController.swift */,
 				04695B721F610D9000345F4D /* FirstViewController.xib */,
 				04695B751F610DBD00345F4D /* SecondViewController.swift */,
+				049457481F6CCCC5002920CC /* EditInfoViewController.swift */,
+				049457491F6CCCC5002920CC /* EditInfoViewController.xib */,
 				047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */,
 				04695B761F610DBD00345F4D /* SecondViewController.xib */,
 				04695B791F610DE000345F4D /* ThirdViewController.swift */,
@@ -184,6 +190,7 @@
 				04695B781F610DBD00345F4D /* SecondViewController.xib in Resources */,
 				040B36CF1F610ACB0000996D /* LaunchScreen.storyboard in Resources */,
 				04695B741F610D9000345F4D /* FirstViewController.xib in Resources */,
+				0494574B1F6CCCC5002920CC /* EditInfoViewController.xib in Resources */,
 				04695B7C1F610DE000345F4D /* ThirdViewController.xib in Resources */,
 				04308C7F1F61213B0058A40E /* AddInfoViewController.xib in Resources */,
 				040B36CC1F610ACB0000996D /* Assets.xcassets in Resources */,
@@ -260,6 +267,7 @@
 				04695B771F610DBD00345F4D /* SecondViewController.swift in Sources */,
 				04695B7B1F610DE000345F4D /* ThirdViewController.swift in Sources */,
 				04308C7B1F61169D0058A40E /* SecurityInfo.swift in Sources */,
+				0494574A1F6CCCC5002920CC /* EditInfoViewController.swift in Sources */,
 				04695B731F610D9000345F4D /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
