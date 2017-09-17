@@ -49,6 +49,8 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     
     func deleteButtonPressed() {
         SecurityInfos.sharedinstance.deleteInfo(infoID: infoID)
+//        SecondViewController.sharedInstance.getInfoData()
+//        SecondViewController.sharedInstance.myTableView.reloadData()
         dismiss(animated: false, completion: nil)
     }
 

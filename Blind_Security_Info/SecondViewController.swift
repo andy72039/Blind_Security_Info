@@ -10,32 +10,26 @@ import UIKit
 import CoreData
 
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    static let sharedInstance = SecondViewController()
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
-    var myTableView: UITableView!
+    var myTableView: UITableView! = UITableView()
 
     var infos = [SecurityInfo]()
-    var infoArray: NSMutableArray! = NSMutableArray()
-    var IDArray: NSMutableArray! = NSMutableArray()
+    var infoArray: NSMutableArray!
+    var IDArray: NSMutableArray!
     let sections = [""]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-
-//        print("2nd ViewController")
-//        SecurityInfos.sharedinstance.addInfo(latitude: -24.1424, longitude: 12.1358, infoContent: "Be careful to a hole.")
-        infos = SecurityInfos.sharedinstance.getAllInfo()
-//        print(infos)
-//        print(infos[infos.count-1].infoContent)
-
-        for si in infos {
-            infoArray.add(from: si.infoContent)
-            IDArray.add(si.objectID)
-        }
-//        print(tableArray)
-//        print(tableArray[tableArray.count-1])
-
+        getInfoData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        getInfoData()
     }
     
     override func updateViewConstraints() {
@@ -193,6 +187,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myTableView.deselectRow(at: indexPath, animated: false)
         let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
         nextViewController.infoText = infos[indexPath.row].infoContent!
         nextViewController.infoID = infos[indexPath.row].objectID
@@ -207,7 +202,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         titleLabel.text = "My All Info"
         titleLabel.textAlignment = .center
         
-        myTableView = UITableView()
+//        myTableView = UITableView()
         myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name
         myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.dataSource = self
@@ -220,5 +215,17 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.addSubview(myTableView)
         headerView.addSubview(titleLabel)
         self.view.setNeedsUpdateConstraints()
+    }
+    
+    func getInfoData() {
+        infos = SecurityInfos.sharedinstance.getAllInfo()
+        infoArray = NSMutableArray()
+        IDArray = NSMutableArray()
+        print("infos = \(infos.count)")
+        for si in infos {
+            infoArray.add(from: si.infoContent)
+            IDArray.add(si.objectID)
+        }
+        myTableView.reloadData()
     }
 }
