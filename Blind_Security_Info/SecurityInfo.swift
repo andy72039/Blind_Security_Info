@@ -39,23 +39,22 @@ class SecurityInfos {
     func deleteInfo(infoID: NSManagedObjectID) {
         do {
             infos =  try context.fetch(SecurityInfo.fetchRequest())
-        } catch {
-            print("Error fetching datafrom CoreData")
-        }
-        for info in infos {
-            if info.objectID == infoID {
-                context.delete(info)
-                print(infos.count)
-                print("delete success")
-//                print(infos.count)
+            for info in infos {
+                if info.objectID == infoID {
+                    context.delete(info)
+                    print("delete success")
+                    //                print(infos.count)
+                }
             }
-        }
-        do {
-            infos =  try context.fetch(SecurityInfo.fetchRequest())
         } catch {
             print("Error fetching datafrom CoreData")
         }
-        print(infos.count)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+//        do {
+//            infos =  try context.fetch(SecurityInfo.fetchRequest())
+//        } catch {
+//            print("Error fetching datafrom CoreData")
+//        }
     }
 
 }

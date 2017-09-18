@@ -221,7 +221,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         infos = SecurityInfos.sharedinstance.getAllInfo()
         infoArray = NSMutableArray()
         IDArray = NSMutableArray()
-        print("infos = \(infos.count)")
         for si in infos {
             infoArray.add(from: si.infoContent)
             IDArray.add(si.objectID)
