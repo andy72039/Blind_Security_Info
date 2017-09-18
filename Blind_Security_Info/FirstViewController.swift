@@ -23,7 +23,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var myTableView: UITableView! = UITableView()
     
     var infos = [SecurityInfo]()
-    var infoArray: NSMutableArray!
+    var infoArray: NSMutableArray! = NSMutableArray()
     var IDArray: NSMutableArray!
     let sections = [""]
 
@@ -33,7 +33,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
@@ -41,11 +41,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.startUpdatingLocation()
 
         setupView()
-        getInfoData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         locationManager.startUpdatingLocation()
+        infos = SecurityInfos.sharedinstance.getAllInfo()
     }
     override func viewWillDisappear(_ animated: Bool) {
         locationManager.stopUpdatingLocation()
@@ -57,11 +57,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 //        let newLocation: CLLocation = locations.last!
         newLocation = locations.last!
         reverseGeocodeCoordinate(coordinate: newLocation.coordinate)
+        checkInfoArround(coordinate: newLocation.coordinate)
     }
     
-    //    func locationManager(manager: CLLocationManager!, didFailWithError error: Error!)
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error Occurs")
         print(error)
     }
     
@@ -78,7 +77,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     func addButtonPressed() {
         let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
         nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
-            nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
+        nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
         self.present(nextViewController, animated: false, completion: nil)
     }
     
@@ -306,13 +305,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         return sections[section] as? String
     }
     
-    func getInfoData() {
-        infos = SecurityInfos.sharedinstance.getAllInfo()
-        infoArray = NSMutableArray()
+    func checkInfoArround(coordinate: CLLocationCoordinate2D) {
+        let lat:Double = round(10000*coordinate.latitude)/10000
+        let long:Double = round(10000*coordinate.longitude)/10000
+        infoArray.removeAllObjects()
         IDArray = NSMutableArray()
         for si in infos {
-            infoArray.add(from: si.infoContent)
-            IDArray.add(si.objectID)
+            if lat == si.latitude && long == si.longitude {
+                infoArray.add(from: si.infoContent)
+            }
         }
         myTableView.reloadData()
     }
