@@ -7,8 +7,9 @@
 import GoogleMaps
 import UIKit
 import CoreLocation
+import CoreData
 
-class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     var locationManager: CLLocationManager = CLLocationManager()
 //    var currLat: double = 0.0
 //    var currLon: double = 0.0
@@ -19,6 +20,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var titleLabel: UILabel! = UILabel()
     var addrLabel: UILabel! = UILabel()
     
+    var myTableView: UITableView! = UITableView()
+    
+    var infos = [SecurityInfo]()
+    var infoArray: NSMutableArray!
+    var IDArray: NSMutableArray!
+    let sections = [""]
+
     convenience init() {
         self.init(nibName: "FirstViewController", bundle: nil)
     }
@@ -33,6 +41,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.startUpdatingLocation()
 
         setupView()
+        getInfoData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,9 +76,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
 
     func addButtonPressed() {
-//        locationManager.stopUpdatingLocation()
-//        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let nextViewController = storyboard.instantiateViewController(withIdentifier: "AddInfoViewController") as! AddInfoViewController
         let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
         nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
             nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
@@ -81,6 +87,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         addButtonConstraints()
         titleLabelConstraints()
         addrLabelConstraints()
+        myTableViewConstraints()
         super.updateViewConstraints()
     }
     
@@ -185,11 +192,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
         NSLayoutConstraint(
             item: addrLabel,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: view,
             attribute: .bottom,
-            multiplier: 0.8,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .bottom,
+            multiplier: 0.9,
             constant: 0.0)
             .isActive = true
         
@@ -225,9 +232,91 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             multiplier: 1.0,
             constant: 0.0)
             .isActive = true
+    }
+    func myTableViewConstraints() {
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
         
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 1.0,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: headerView,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .bottom,
+            relatedBy: .equal,
+            toItem: addrLabel,
+            attribute: .top,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return infoArray.count
+    }
+    
+    // return cells
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        
+        if indexPath.section == 0 {
+            cell.labelOne.text = "\(infoArray[indexPath.row])"
+            //            cell.labelTwo.text = "Message \(indexPath.row)"
+            //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
+        }
+        return cell
+    }
+    
+    // Session
+    //
+    //
+    
+    // return the number of sections
+    func numberOfSections(in tableView: UITableView) -> Int{
+        return sections.count
+    }
+    
+    // return the title of sections
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section] as? String
+    }
+    
+    func getInfoData() {
+        infos = SecurityInfos.sharedinstance.getAllInfo()
+        infoArray = NSMutableArray()
+        IDArray = NSMutableArray()
+        for si in infos {
+            infoArray.add(from: si.infoContent)
+            IDArray.add(si.objectID)
+        }
+        myTableView.reloadData()
+    }
+
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
@@ -244,9 +333,18 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         addrLabel.translatesAutoresizingMaskIntoConstraints = false
         //        addrLabel.text = "A"
         addrLabel.textAlignment = .center
-        
+
+        myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.dataSource = self
+        myTableView.delegate = self
+        myTableView.rowHeight = UITableViewAutomaticDimension
+        myTableView.estimatedRowHeight = 44
+        myTableView.allowsSelection = true
+
         self.view.addSubview(headerView)
         self.view.addSubview(addrLabel)
+        self.view.addSubview(myTableView)
         headerView.addSubview(addButton)
         headerView.addSubview(titleLabel)
         self.view.setNeedsUpdateConstraints()
