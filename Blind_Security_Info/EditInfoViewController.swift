@@ -36,10 +36,8 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveButtonPressed() {
-//        if !(textField.text?.isEmpty)! {
-//            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoContent: textField.text!)
-//            dismiss(animated: false, completion: nil)
-//        }
+        SecurityInfos.sharedinstance.editInfo(infoID: infoID, content: textField.text!)
+        dismiss(animated: true, completion: nil)
     }
     
     func cancelButtonPressed() {
@@ -49,8 +47,6 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     
     func deleteButtonPressed() {
         SecurityInfos.sharedinstance.deleteInfo(infoID: infoID)
-//        SecondViewController.sharedInstance.getInfoData()
-//        SecondViewController.sharedInstance.myTableView.reloadData()
         dismiss(animated: false, completion: nil)
     }
 

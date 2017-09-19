@@ -341,7 +341,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         myTableView.delegate = self
         myTableView.rowHeight = UITableViewAutomaticDimension
         myTableView.estimatedRowHeight = 44
-        myTableView.allowsSelection = true
+        myTableView.allowsSelection = false
 
         self.view.addSubview(headerView)
         self.view.addSubview(addrLabel)

@@ -36,6 +36,23 @@ class SecurityInfos {
         return infos
     }
 
+    func editInfo(infoID: NSManagedObjectID, content: String) {
+        do {
+            infos =  try context.fetch(SecurityInfo.fetchRequest())
+
+            for info in infos {
+                if info.objectID == infoID {
+                    info.infoContent = content
+                    //                print(infos.count)
+                }
+            }
+        } catch {
+            print("Error fetching datafrom CoreData")
+        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+    }
+
     func deleteInfo(infoID: NSManagedObjectID) {
         do {
             infos =  try context.fetch(SecurityInfo.fetchRequest())
