@@ -25,7 +25,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     var infos = [SecurityInfo]()
     var infoArray: NSMutableArray! = NSMutableArray()
-    var IDArray: NSMutableArray!
+    var IDArray: NSMutableArray! = NSMutableArray()
     let sections = [""]
 
     let synth = AVSpeechSynthesizer()
@@ -312,20 +312,29 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     func checkInfoArround(coordinate: CLLocationCoordinate2D) {
         let lat:Double = round(10000*coordinate.latitude)/10000
         let long:Double = round(10000*coordinate.longitude)/10000
-        infoArray.removeAllObjects()
-        IDArray = NSMutableArray()
+//        infoArray.removeAllObjects()
+//        IDArray
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
+        myUtterance.rate = 0.4
         for si in infos {
             if lat == si.latitude && long == si.longitude {
-                infoArray.add(from: si.infoContent)
+                if IDArray.contains(si.objectID) {
+                    print("exist)")
+                    continue
+                }
+                else {
+                    infoArray.add(from: si.infoContent)
+                    IDArray.add(from: si.objectID)
+                    myUtterance = AVSpeechUtterance(string: String(describing: si.infoContent!))
+                    synth.speak(myUtterance)
+                }
             }
-        }
-        if infoArray.count != 0 {
-            myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
-            myUtterance.rate = 0.4
-            for info in infoArray {
-                myUtterance = AVSpeechUtterance(string: String(describing: info))
-                synth.speak(myUtterance)
-                
+            else {
+                if IDArray.contains(si.objectID) {
+                    infoArray.remove(si.infoContent)
+                    IDArray.remove(si.objectID)
+//                    print("remove")
+                }
             }
         }
         myTableView.reloadData()
