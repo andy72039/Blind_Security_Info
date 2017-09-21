@@ -79,10 +79,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
 
     func addButtonPressed() {
-        myUtterance = AVSpeechUtterance(string: "我是陳鵬安")
-        myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
-        myUtterance.rate = 0.4
-        synth.speak(myUtterance)
         let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
         nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
         nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
@@ -321,6 +317,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         for si in infos {
             if lat == si.latitude && long == si.longitude {
                 infoArray.add(from: si.infoContent)
+            }
+        }
+        if infoArray.count != 0 {
+            myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
+            myUtterance.rate = 0.4
+            for info in infoArray {
+                myUtterance = AVSpeechUtterance(string: String(describing: info))
+                synth.speak(myUtterance)
+                
             }
         }
         myTableView.reloadData()
