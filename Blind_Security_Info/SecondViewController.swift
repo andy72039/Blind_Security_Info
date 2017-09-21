@@ -17,18 +17,17 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var myTableView: UITableView! = UITableView()
 
     var infos = [SecurityInfo]()
-    var infoArray: NSMutableArray!
-    var IDArray: NSMutableArray!
+    var infoArray: NSMutableArray! = NSMutableArray()
+    var IDArray: NSMutableArray! = NSMutableArray()
     let sections = [""]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        getInfoData()
+//        getInfoData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
         getInfoData()
     }
     
@@ -118,7 +117,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             relatedBy: .equal,
             toItem: self.view,
             attribute: .bottom,
-            multiplier: 1.0,
+            multiplier: 0.9,
             constant: 0.0)
         .isActive = true
     }
@@ -219,8 +218,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getInfoData() {
         infos = SecurityInfos.sharedinstance.getAllInfo()
-        infoArray = NSMutableArray()
-        IDArray = NSMutableArray()
+//        infoArray = NSMutableArray()
+//        IDArray = NSMutableArray()
+        infoArray.removeAllObjects()
+        IDArray.removeAllObjects()
         for si in infos {
             infoArray.add(from: si.infoContent)
             IDArray.add(si.objectID)

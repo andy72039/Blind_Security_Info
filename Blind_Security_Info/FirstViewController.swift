@@ -8,6 +8,7 @@ import GoogleMaps
 import UIKit
 import CoreLocation
 import CoreData
+import AVFoundation
 
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     var locationManager: CLLocationManager = CLLocationManager()
@@ -27,6 +28,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var IDArray: NSMutableArray!
     let sections = [""]
 
+    let synth = AVSpeechSynthesizer()
+    var myUtterance = AVSpeechUtterance(string: "")
+    
     convenience init() {
         self.init(nibName: "FirstViewController", bundle: nil)
     }
@@ -75,6 +79,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
 
     func addButtonPressed() {
+        myUtterance = AVSpeechUtterance(string: "我是陳鵬安")
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
+        myUtterance.rate = 0.4
+        synth.speak(myUtterance)
         let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
         nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
         nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
