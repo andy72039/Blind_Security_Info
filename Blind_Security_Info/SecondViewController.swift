@@ -188,7 +188,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myTableView.deselectRow(at: indexPath, animated: false)
         let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
-        nextViewController.infoText = infos[indexPath.row].infoContent!
+        nextViewController.infoTitle = infos[indexPath.row].infoTitle!
+        nextViewController.infoContent = infos[indexPath.row].infoContent!
         nextViewController.infoID = infos[indexPath.row].objectID
         self.present(nextViewController, animated: false, completion: nil)
     }

@@ -13,10 +13,12 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     var lat: Double = 0.0
     var lon: Double = 0.0
     var infoID: NSManagedObjectID = NSManagedObjectID()
-    var infoText: String = ""
-    
-    var headerView: UIView! = UIView()
-    var textField: UITextField! = UITextField()
+    var infoTitle: String = ""
+    var infoContent: String = ""
+
+     var headerView: UIView! = UIView()
+     var titleTextField: UITextField! = UITextField()
+    var contentTextField: UITextField! = UITextField()
     var saveButton: UIButton! = UIButton()
     var cancelButton: UIButton! = UIButton()
     var titleLabel: UILabel! = UILabel()
@@ -28,7 +30,8 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
+        contentTextField.delegate = self
+        titleTextField.delegate = self
         
         // Do any additional setup after loading the view.
         setupView()
@@ -36,7 +39,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveButtonPressed() {
-        SecurityInfos.sharedinstance.editInfo(infoID: infoID, content: textField.text!)
+        SecurityInfos.sharedinstance.editInfo(infoID: infoID, infoTitle: titleTextField.text!, infoContent: contentTextField.text!)
         dismiss(animated: true, completion: nil)
     }
     
@@ -57,7 +60,8 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
     
     override func updateViewConstraints() {
         headerViewConstraints()
-        textFieldConstraints()
+        titleTextFieldConstraints()
+        contentTextFieldConstraints()
         saveButtonConstraints()
         cancelButtonConstraints()
         titleLabelConstraints()
@@ -110,9 +114,9 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
     }
     
-    func textFieldConstraints() {
+    func titleTextFieldConstraints() {
         NSLayoutConstraint(
-            item: textField,
+            item: titleTextField,
             attribute: .centerX,
             relatedBy: .equal,
             toItem: self.view,
@@ -122,7 +126,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
         
         NSLayoutConstraint(
-            item: textField,
+            item: titleTextField,
             attribute: .width,
             relatedBy: .equal,
             toItem: self.view,
@@ -133,12 +137,45 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
         
         NSLayoutConstraint(
-            item: textField,
-            attribute: .top,
+            item: titleTextField,
+            attribute: .centerY,
             relatedBy: .equal,
             toItem: self.view,
-            attribute: .bottom,
-            multiplier: 0.4,
+            attribute: .centerY,
+            multiplier: 0.6,
+            constant: 0.0)
+            .isActive = true
+    }
+
+    func contentTextFieldConstraints() {
+        NSLayoutConstraint(
+            item: contentTextField,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: contentTextField,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 0.8,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: contentTextField,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerY,
+            multiplier: 1.0,
             constant: 0.0)
             .isActive = true
     }
@@ -264,11 +301,11 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint(
             item: deleteButton,
-            attribute: .top,
+            attribute: .centerY,
             relatedBy: .equal,
             toItem: self.view,
-            attribute: .bottom,
-            multiplier: 0.8,
+            attribute: .centerY,
+            multiplier: 1.6,
             constant: 0.0)
             .isActive = true
     }
@@ -277,10 +314,16 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
         
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .center
-        textField.text = infoText
+        
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+        titleTextField.borderStyle = .roundedRect
+        titleTextField.textAlignment = .center
+        titleTextField.text = infoTitle
+
+        contentTextField.translatesAutoresizingMaskIntoConstraints = false
+        contentTextField.borderStyle = .roundedRect
+        contentTextField.textAlignment = .center
+        contentTextField.text = infoContent
         
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action:#selector(saveButtonPressed), for: .touchUpInside)
@@ -302,8 +345,10 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate {
         titleLabel.textAlignment = .center
 
         self.view.addSubview(headerView)
-        self.view.addSubview(textField)
+        self.view.addSubview(titleTextField)
+        self.view.addSubview(contentTextField)
             self.view.addSubview(deleteButton)
+        
         headerView.addSubview(cancelButton)
         headerView.addSubview(saveButton)
         headerView.addSubview(titleLabel)

@@ -15,11 +15,12 @@ class SecurityInfos {
     let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
     var infos = [SecurityInfo]()
     
-    func addInfo(latitude:Double, longitude:Double, infoContent:String) {
+    func addInfo(latitude:Double, longitude:Double, infoTitle:String, infoContent:String) {
         let si = SecurityInfo(context:context)
         
         si.latitude = latitude
         si.longitude = longitude
+        si.infoTitle = infoTitle
         si.infoContent = infoContent
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -36,13 +37,14 @@ class SecurityInfos {
         return infos
     }
 
-    func editInfo(infoID: NSManagedObjectID, content: String) {
+    func editInfo(infoID: NSManagedObjectID, infoTitle: String, infoContent: String) {
         do {
             infos =  try context.fetch(SecurityInfo.fetchRequest())
 
             for info in infos {
                 if info.objectID == infoID {
-                    info.infoContent = content
+                    info.infoTitle = infoTitle
+                    info.infoContent = infoContent
                     //                print(infos.count)
                 }
             }

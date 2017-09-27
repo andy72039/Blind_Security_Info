@@ -11,9 +11,11 @@ import UIKit
 class AddInfoViewController: UIViewController, UITextFieldDelegate {
     var lat: Double = 0.0
     var lon: Double = 0.0
+    var infoTitle: String = ""
     
     var headerView: UIView! = UIView()
-    var textField: UITextField! = UITextField()
+    var titleTextField: UITextField! = UITextField()
+    var contentTextField: UITextField! = UITextField()
     var saveButton: UIButton! = UIButton()
     var cancelButton: UIButton! = UIButton()
     var titleLabel: UILabel! = UILabel()
@@ -24,7 +26,8 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
+        contentTextField.delegate = self
+        titleTextField.delegate = self
 
         // Do any additional setup after loading the view.
         setupView()
@@ -32,8 +35,8 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     func saveButtonPressed() {
-        if !(textField.text?.isEmpty)! {
-            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoContent: textField.text!)
+        if !(contentTextField.text?.isEmpty)! {
+            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoTitle: titleTextField.text!, infoContent: contentTextField.text!)
             dismiss(animated: false, completion: nil)
         }
     }
@@ -50,7 +53,8 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
     
     override func updateViewConstraints() {
         headerViewConstraints()
-        textFieldConstraints()
+        titleTextFieldConstraints()
+        contentTextFieldConstraints()
         saveButtonConstraints()
         cancelButtonConstraints()
         titleLabelConstraints()
@@ -102,9 +106,9 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         .isActive = true
     }
 
-    func textFieldConstraints() {
+    func titleTextFieldConstraints() {
         NSLayoutConstraint(
-            item: textField,
+            item: titleTextField,
             attribute: .centerX,
             relatedBy: .equal,
             toItem: self.view,
@@ -114,7 +118,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
         
         NSLayoutConstraint(
-            item: textField,
+            item: titleTextField,
             attribute: .width,
             relatedBy: .equal,
             toItem: self.view,
@@ -125,12 +129,45 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             .isActive = true
         
         NSLayoutConstraint(
-            item: textField,
-            attribute: .top,
+            item: titleTextField,
+            attribute: .centerY,
             relatedBy: .equal,
             toItem: self.view,
-            attribute: .bottom,
-            multiplier: 0.4,
+            attribute: .centerY,
+            multiplier: 0.8,
+            constant: 0.0)
+            .isActive = true
+    }
+
+    func contentTextFieldConstraints() {
+        NSLayoutConstraint(
+            item: contentTextField,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: contentTextField,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 0.8,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: contentTextField,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerY,
+            multiplier: 1.2,
             constant: 0.0)
             .isActive = true
     }
@@ -237,9 +274,14 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
 
-      textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .center
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+        titleTextField.borderStyle = .roundedRect
+        titleTextField.textAlignment = .center
+        titleTextField.text = infoTitle
+
+        contentTextField.translatesAutoresizingMaskIntoConstraints = false
+        contentTextField.borderStyle = .roundedRect
+        contentTextField.textAlignment = .center
 
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action:#selector(saveButtonPressed), for: .touchUpInside)
@@ -256,7 +298,8 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         titleLabel.textAlignment = .center
 
         self.view.addSubview(headerView)
-        self.view.addSubview(textField)
+        self.view.addSubview(titleTextField)
+        self.view.addSubview(contentTextField)
         headerView.addSubview(cancelButton)
         headerView.addSubview(saveButton)
         headerView.addSubview(titleLabel)

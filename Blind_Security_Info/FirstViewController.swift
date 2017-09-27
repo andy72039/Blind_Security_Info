@@ -79,10 +79,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
 
     func addButtonPressed() {
-        let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
-        nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
-        nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
-        self.present(nextViewController, animated: false, completion: nil)
+        if !(addrLabel.text?.isEmpty)! {
+            let nextViewController = AddInfoViewController(nibName: "AddInfoViewController", bundle: nil)
+            nextViewController.lat = round(10000*newLocation.coordinate.latitude)/10000
+            nextViewController.lon = round(10000*newLocation.coordinate.longitude)/10000
+            nextViewController.infoTitle = addrLabel.text!
+            self.present(nextViewController, animated: false, completion: nil)
+        }
     }
     
     override func updateViewConstraints() {
