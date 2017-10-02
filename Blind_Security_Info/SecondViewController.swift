@@ -17,7 +17,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var myTableView: UITableView! = UITableView()
 
     var infos = [SecurityInfo]()
-    var infoArray: NSMutableArray! = NSMutableArray()
+    var infoTitleArray: NSMutableArray! = NSMutableArray()
+    var infoContentArray: NSMutableArray! = NSMutableArray()
     var IDArray: NSMutableArray! = NSMutableArray()
     let sections = [""]
 
@@ -155,7 +156,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return infoArray.count
+            return infoContentArray.count
     }
 
     // return cells
@@ -164,8 +165,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         
         if indexPath.section == 0 {
-            cell.labelOne.text = "\(infoArray[indexPath.row])"
-            //            cell.labelTwo.text = "Message \(indexPath.row)"
+            cell.labelOne.text = "\(infoContentArray[indexPath.row])"
+            cell.labelTwo.text = "\(infoTitleArray[indexPath.row])"
             //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
         }
         return cell
@@ -220,12 +221,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getInfoData() {
         infos = SecurityInfos.sharedinstance.getAllInfo()
-//        infoArray = NSMutableArray()
-//        IDArray = NSMutableArray()
-        infoArray.removeAllObjects()
+        infoContentArray.removeAllObjects()
+        infoTitleArray.removeAllObjects()
         IDArray.removeAllObjects()
         for si in infos {
-            infoArray.add(from: si.infoContent)
+            infoContentArray.add(from: si.infoContent)
+            infoTitleArray.add(from: si.infoTitle)
             IDArray.add(si.objectID)
         }
         myTableView.reloadData()
