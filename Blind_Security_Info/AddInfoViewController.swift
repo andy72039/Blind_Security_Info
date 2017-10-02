@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddInfoViewController: UIViewController, UITextFieldDelegate {
+class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     var lat: Double = 0.0
     var lon: Double = 0.0
     var infoTitle: String = ""
@@ -19,6 +19,10 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
     var saveButton: UIButton! = UIButton()
     var cancelButton: UIButton! = UIButton()
     var titleLabel: UILabel! = UILabel()
+    var myPickerView: UIPickerView! = UIPickerView()
+
+    let infoLevel = ["low", "medium", "High"]
+    var securityLevel = 0
 
     convenience init() {
         self.init(nibName: "AddInfoViewController", bundle: nil)
@@ -26,8 +30,6 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentTextField.delegate = self
-        titleTextField.delegate = self
 
         // Do any additional setup after loading the view.
         setupView()
@@ -36,7 +38,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
     
     func saveButtonPressed() {
         if !(contentTextField.text?.isEmpty)! {
-            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoTitle: titleTextField.text!, infoContent: contentTextField.text!)
+            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoTitle: titleTextField.text!, infoContent: contentTextField.text!, securityLevel: securityLevel)
             dismiss(animated: false, completion: nil)
         }
     }
@@ -58,6 +60,8 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         saveButtonConstraints()
         cancelButtonConstraints()
         titleLabelConstraints()
+        myPickerViewConstraints()
+        
         super.updateViewConstraints()
     }
 
@@ -134,7 +138,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             relatedBy: .equal,
             toItem: self.view,
             attribute: .centerY,
-            multiplier: 0.8,
+            multiplier: 0.6,
             constant: 0.0)
             .isActive = true
     }
@@ -269,16 +273,69 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
             constant: 0.0)
             .isActive = true
     }
+
+    func myPickerViewConstraints() {
+        NSLayoutConstraint(
+            item: myPickerView,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myPickerView,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 1.0,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myPickerView,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerY,
+            multiplier: 1.6,
+            constant: 0.0)
+            .isActive = true
+    }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return infoLevel.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return infoLevel[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       securityLevel = row
+        print(row)
+    }
+    
+
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
 
+        titleTextField.delegate = self
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.borderStyle = .roundedRect
         titleTextField.textAlignment = .center
         titleTextField.text = infoTitle
 
+        contentTextField.delegate = self
         contentTextField.translatesAutoresizingMaskIntoConstraints = false
         contentTextField.borderStyle = .roundedRect
         contentTextField.textAlignment = .center
@@ -297,9 +354,14 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate {
         titleLabel.text = "Add Your Info"
         titleLabel.textAlignment = .center
 
+        myPickerView.delegate = self
+        myPickerView.dataSource = self
+        myPickerView.translatesAutoresizingMaskIntoConstraints = false
+
         self.view.addSubview(headerView)
         self.view.addSubview(titleTextField)
         self.view.addSubview(contentTextField)
+        self.view.addSubview(myPickerView)
         headerView.addSubview(cancelButton)
         headerView.addSubview(saveButton)
         headerView.addSubview(titleLabel)

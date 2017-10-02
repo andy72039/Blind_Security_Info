@@ -15,13 +15,15 @@ class SecurityInfos {
     let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
     var infos = [SecurityInfo]()
     
-    func addInfo(latitude:Double, longitude:Double, infoTitle:String, infoContent:String) {
+    func addInfo(latitude:Double, longitude:Double, infoTitle:String, infoContent:String, securityLevel: Int) {
         let si = SecurityInfo(context:context)
         
         si.latitude = latitude
         si.longitude = longitude
         si.infoTitle = infoTitle
         si.infoContent = infoContent
+        si.securityLevel = Int64(securityLevel)
+        
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         print("Save successful!")
