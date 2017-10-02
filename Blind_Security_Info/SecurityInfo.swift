@@ -39,7 +39,7 @@ class SecurityInfos {
         return infos
     }
 
-    func editInfo(infoID: NSManagedObjectID, infoTitle: String, infoContent: String) {
+    func editInfo(infoID: NSManagedObjectID, infoTitle: String, infoContent: String, securityLevel: Int) {
         do {
             infos =  try context.fetch(SecurityInfo.fetchRequest())
 
@@ -47,7 +47,7 @@ class SecurityInfos {
                 if info.objectID == infoID {
                     info.infoTitle = infoTitle
                     info.infoContent = infoContent
-                    //                print(infos.count)
+                    info.securityLevel = Int64(securityLevel)
                 }
             }
         } catch {
@@ -63,8 +63,6 @@ class SecurityInfos {
             for info in infos {
                 if info.objectID == infoID {
                     context.delete(info)
-                    print("delete success")
-                    //                print(infos.count)
                 }
             }
         } catch {

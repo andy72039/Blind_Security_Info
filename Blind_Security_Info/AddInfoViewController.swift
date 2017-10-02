@@ -31,9 +31,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         setupView()
-//        print("\(lat), \(lon)")
     }
     
     func saveButtonPressed() {

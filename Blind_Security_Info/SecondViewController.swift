@@ -190,6 +190,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
         nextViewController.infoTitle = infos[indexPath.row].infoTitle!
         nextViewController.infoContent = infos[indexPath.row].infoContent!
+        nextViewController.securityLevel = Int(infos[indexPath.row].securityLevel)
         nextViewController.infoID = infos[indexPath.row].objectID
         self.present(nextViewController, animated: false, completion: nil)
     }
