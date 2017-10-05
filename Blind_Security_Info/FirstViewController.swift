@@ -30,7 +30,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 
     let synth = AVSpeechSynthesizer()
     var myUtterance = AVSpeechUtterance(string: "")
-    
+
+    var player0: AVAudioPlayer!
+    var player1: AVAudioPlayer!
+    var player2: AVAudioPlayer!
+
     convenience init() {
         self.init(nibName: "FirstViewController", bundle: nil)
     }
@@ -328,6 +332,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 else {
                     infoArray.add(from: si.infoContent)
                     IDArray.add(from: si.objectID)
+                    switch si.securityLevel {
+                        case 0: player0.play()
+                        case 1: player1.play()
+                        case 2: player2.play()
+                        default: break
+                    }
+
                     myUtterance = AVSpeechUtterance(string: String(describing: si.infoContent!))
                     synth.speak(myUtterance)
                 }
@@ -374,5 +385,22 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         headerView.addSubview(addButton)
         headerView.addSubview(titleLabel)
         self.view.setNeedsUpdateConstraints()
+        
+        let url0 = Bundle.main.url(forResource: "sound0", withExtension: "mp3")!
+        let url1 = Bundle.main.url(forResource: "sound1", withExtension: "mp3")!
+        let url2 = Bundle.main.url(forResource: "sound2", withExtension: "mp3")!
+        
+        do {
+            player0 = try AVAudioPlayer(contentsOf: url0)
+            player1 = try AVAudioPlayer(contentsOf: url1)
+            player2 = try AVAudioPlayer(contentsOf: url2)
+            
+            player0.numberOfLoops = 0
+            player1.numberOfLoops = 0
+            player2.numberOfLoops = 0
+        } catch{
+            print("error")
+        }
+
     }
 }

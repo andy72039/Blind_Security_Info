@@ -26,6 +26,9 @@
 		047B289D1F6B6CA1008A7151 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */; };
 		0494574A1F6CCCC5002920CC /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049457481F6CCCC5002920CC /* EditInfoViewController.swift */; };
 		0494574B1F6CCCC5002920CC /* EditInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049457491F6CCCC5002920CC /* EditInfoViewController.xib */; };
+		04F8D2C61F86700C00F83C2F /* sound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D2C31F86700C00F83C2F /* sound2.mp3 */; };
+		04F8D2C71F86700C00F83C2F /* sound1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D2C41F86700C00F83C2F /* sound1.mp3 */; };
+		04F8D2CA1F8671CC00F83C2F /* sound0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D2C91F8671CC00F83C2F /* sound0.mp3 */; };
 		98C64E5A07D4F932B3B8B7C5 /* Pods_Blind_Security_Info.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FAA1AA378BDE4245412B9F /* Pods_Blind_Security_Info.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -51,6 +54,9 @@
 		047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = Blind_Security_Info/CustomTableViewCell.swift; sourceTree = "<group>"; };
 		049457481F6CCCC5002920CC /* EditInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditInfoViewController.swift; path = Blind_Security_Info/EditInfoViewController.swift; sourceTree = "<group>"; };
 		049457491F6CCCC5002920CC /* EditInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditInfoViewController.xib; path = Blind_Security_Info/EditInfoViewController.xib; sourceTree = "<group>"; };
+		04F8D2C31F86700C00F83C2F /* sound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound2.mp3; path = Blind_Security_Info/sounds/sound2.mp3; sourceTree = "<group>"; };
+		04F8D2C41F86700C00F83C2F /* sound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound1.mp3; path = Blind_Security_Info/sounds/sound1.mp3; sourceTree = "<group>"; };
+		04F8D2C91F8671CC00F83C2F /* sound0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound0.mp3; path = Blind_Security_Info/sounds/sound0.mp3; sourceTree = "<group>"; };
 		45FAA1AA378BDE4245412B9F /* Pods_Blind_Security_Info.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blind_Security_Info.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD49901034E14EEC6432446 /* Pods-Blind_Security_Info.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blind_Security_Info.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Blind_Security_Info/Pods-Blind_Security_Info.debug.xcconfig"; sourceTree = "<group>"; };
 		86CCE0186306377C85F207F7 /* Pods-Blind_Security_Info.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blind_Security_Info.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blind_Security_Info/Pods-Blind_Security_Info.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +77,9 @@
 		040B36B51F610ACB0000996D = {
 			isa = PBXGroup;
 			children = (
+				04F8D2C91F8671CC00F83C2F /* sound0.mp3 */,
+				04F8D2C31F86700C00F83C2F /* sound2.mp3 */,
+				04F8D2C41F86700C00F83C2F /* sound1.mp3 */,
 				04308C7C1F61213B0058A40E /* AddInfoViewController.swift */,
 				04308C7D1F61213B0058A40E /* AddInfoViewController.xib */,
 				04308C7A1F61169D0058A40E /* SecurityInfo.swift */,
@@ -201,6 +210,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F8D2CA1F8671CC00F83C2F /* sound0.mp3 in Resources */,
+				04F8D2C61F86700C00F83C2F /* sound2.mp3 in Resources */,
+				04F8D2C71F86700C00F83C2F /* sound1.mp3 in Resources */,
 				04695B781F610DBD00345F4D /* SecondViewController.xib in Resources */,
 				040B36CF1F610ACB0000996D /* LaunchScreen.storyboard in Resources */,
 				046F5CC71F80E6FF00AA02AA /* ForthViewController.xib in Resources */,
