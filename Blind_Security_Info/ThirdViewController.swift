@@ -8,24 +8,30 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController {
+class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
-    var ttsSwitch: UISwitch! = UISwitch()
+    var myTableView: UITableView! = UITableView()
     
+    var infos = [SecurityInfo]()
+    var infoTitleArray: NSMutableArray! = NSMutableArray()
+    var infoContentArray: NSMutableArray! = NSMutableArray()
+    var IDArray: NSMutableArray! = NSMutableArray()
+    let sections = [""]
+
     override func viewDidLoad() {
         super.viewDidLoad()
+//        infoTitleArray.add(from: "My Home")
+        infoContentArray.add(from: "My Home")
+
         setupView()
-    }
-    
-    func switchChanged(sender: UISwitch!) {
-        
     }
     
     override func updateViewConstraints() {
         headerViewConstraints()
         titleLabelConstraints()
-        ttsSwitchConstraints()
+        myTableViewConstraints()
+
         super.updateViewConstraints()
     }
     
@@ -71,6 +77,48 @@ class ThirdViewController: UIViewController {
             .isActive = true
     }
     
+    func myTableViewConstraints() {
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 1.0,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: headerView,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        NSLayoutConstraint(
+            item: myTableView,
+            attribute: .bottom,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .bottom,
+            multiplier: 0.9,
+            constant: 0.0)
+            .isActive = true
+    }
+    
     func titleLabelConstraints() {
         NSLayoutConstraint(
             item: titleLabel,
@@ -103,61 +151,64 @@ class ThirdViewController: UIViewController {
             .isActive = true
     }
     
-    func ttsSwitchConstraints() {
-        NSLayoutConstraint(
-            item: ttsSwitch,
-            attribute: .centerX,
-            relatedBy: .equal,
-            toItem: self.view,
-            attribute: .centerX,
-            multiplier: 1.0,
-            constant: 0.0)
-            .isActive = true
-        
-        NSLayoutConstraint(
-            item: ttsSwitch,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: self.view,
-            attribute: .width,
-            multiplier: 1.0,
-            constant: 0.0
-            )
-            .isActive = true
-        
-        NSLayoutConstraint(
-            item: ttsSwitch,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: headerView,
-            attribute: .bottom,
-            multiplier: 1.0,
-            constant: 0.0)
-            .isActive = true
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return infoContentArray.count
     }
-
+    
+    // return cells
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ServerTableViewCell
+        
+        if indexPath.section == 0 {
+            cell.labelOne.text = "\(infoContentArray[indexPath.row])"
+            cell.labelTwo.text = "\(infoTitleArray[indexPath.row])"
+            //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
+        }
+        return cell
+    }
+    
+    
+    // return the number of sections
+    func numberOfSections(in tableView: UITableView) -> Int{
+        return sections.count
+    }
+    
+    // return the title of sections
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section] as? String
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myTableView.deselectRow(at: indexPath, animated: false)
+        let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
+        nextViewController.infoTitle = infos[indexPath.row].infoTitle!
+        nextViewController.infoContent = infos[indexPath.row].infoContent!
+        nextViewController.securityLevel = Int(infos[indexPath.row].securityLevel)
+        nextViewController.infoID = infos[indexPath.row].objectID
+        self.present(nextViewController, animated: false, completion: nil)
+    }
+    
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Settings"
+        titleLabel.text = "Share Infos"
         titleLabel.textAlignment = .center
         
-
-ttsSwitch.translatesAutoresizingMaskIntoConstraints = false
-ttsSwitch.center = self.view.center
-        ttsSwitch.setOn(false, animated: false)
-        ttsSwitch.tintColor = UIColor.blue
-        ttsSwitch.onTintColor = UIColor.cyan
-        ttsSwitch.thumbTintColor = UIColor.red
-    ttsSwitch.backgroundColor = UIColor.yellow
-        ttsSwitch.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+        myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.dataSource = self
+        myTableView.delegate = self
+        myTableView.rowHeight = UITableViewAutomaticDimension
+        myTableView.estimatedRowHeight = 44
+        myTableView.allowsSelection = true
         
         self.view.addSubview(headerView)
-        self.view.addSubview(ttsSwitch)
+        self.view.addSubview(myTableView)
         headerView.addSubview(titleLabel)
-
         self.view.setNeedsUpdateConstraints()
+        
     }
 }

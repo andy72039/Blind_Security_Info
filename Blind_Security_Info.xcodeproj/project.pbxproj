@@ -26,6 +26,7 @@
 		047B289D1F6B6CA1008A7151 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */; };
 		0494574A1F6CCCC5002920CC /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049457481F6CCCC5002920CC /* EditInfoViewController.swift */; };
 		0494574B1F6CCCC5002920CC /* EditInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049457491F6CCCC5002920CC /* EditInfoViewController.xib */; };
+		04DF373D1F88D429007B76B9 /* ServerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF373C1F88D429007B76B9 /* ServerTableViewCell.swift */; };
 		04F8D2C61F86700C00F83C2F /* sound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D2C31F86700C00F83C2F /* sound2.mp3 */; };
 		04F8D2C71F86700C00F83C2F /* sound1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D2C41F86700C00F83C2F /* sound1.mp3 */; };
 		04F8D2CA1F8671CC00F83C2F /* sound0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D2C91F8671CC00F83C2F /* sound0.mp3 */; };
@@ -54,6 +55,7 @@
 		047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = Blind_Security_Info/CustomTableViewCell.swift; sourceTree = "<group>"; };
 		049457481F6CCCC5002920CC /* EditInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditInfoViewController.swift; path = Blind_Security_Info/EditInfoViewController.swift; sourceTree = "<group>"; };
 		049457491F6CCCC5002920CC /* EditInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditInfoViewController.xib; path = Blind_Security_Info/EditInfoViewController.xib; sourceTree = "<group>"; };
+		04DF373C1F88D429007B76B9 /* ServerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerTableViewCell.swift; path = Blind_Security_Info/ServerTableViewCell.swift; sourceTree = "<group>"; };
 		04F8D2C31F86700C00F83C2F /* sound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound2.mp3; path = Blind_Security_Info/sounds/sound2.mp3; sourceTree = "<group>"; };
 		04F8D2C41F86700C00F83C2F /* sound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound1.mp3; path = Blind_Security_Info/sounds/sound1.mp3; sourceTree = "<group>"; };
 		04F8D2C91F8671CC00F83C2F /* sound0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound0.mp3; path = Blind_Security_Info/sounds/sound0.mp3; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				049457481F6CCCC5002920CC /* EditInfoViewController.swift */,
 				049457491F6CCCC5002920CC /* EditInfoViewController.xib */,
 				047B289C1F6B6CA1008A7151 /* CustomTableViewCell.swift */,
+				04DF373C1F88D429007B76B9 /* ServerTableViewCell.swift */,
 				04695B761F610DBD00345F4D /* SecondViewController.xib */,
 				04695B791F610DE000345F4D /* ThirdViewController.swift */,
 				04695B7A1F610DE000345F4D /* ThirdViewController.xib */,
@@ -296,6 +299,7 @@
 				04695B7B1F610DE000345F4D /* ThirdViewController.swift in Sources */,
 				04308C7B1F61169D0058A40E /* SecurityInfo.swift in Sources */,
 				0494574A1F6CCCC5002920CC /* EditInfoViewController.swift in Sources */,
+				04DF373D1F88D429007B76B9 /* ServerTableViewCell.swift in Sources */,
 				04695B731F610D9000345F4D /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
