@@ -15,6 +15,7 @@
 		04308C7B1F61169D0058A40E /* SecurityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308C7A1F61169D0058A40E /* SecurityInfo.swift */; };
 		04308C7E1F61213B0058A40E /* AddInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308C7C1F61213B0058A40E /* AddInfoViewController.swift */; };
 		04308C7F1F61213B0058A40E /* AddInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04308C7D1F61213B0058A40E /* AddInfoViewController.xib */; };
+		0440E2F51F9491FB004F01AC /* OnlineInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0440E2F41F9491FB004F01AC /* OnlineInfos.swift */; };
 		04695B731F610D9000345F4D /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04695B711F610D9000345F4D /* FirstViewController.swift */; };
 		04695B741F610D9000345F4D /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04695B721F610D9000345F4D /* FirstViewController.xib */; };
 		04695B771F610DBD00345F4D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04695B751F610DBD00345F4D /* SecondViewController.swift */; };
@@ -44,6 +45,7 @@
 		04308C7A1F61169D0058A40E /* SecurityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecurityInfo.swift; path = Blind_Security_Info/SecurityInfo.swift; sourceTree = "<group>"; };
 		04308C7C1F61213B0058A40E /* AddInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddInfoViewController.swift; path = Blind_Security_Info/AddInfoViewController.swift; sourceTree = "<group>"; };
 		04308C7D1F61213B0058A40E /* AddInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddInfoViewController.xib; path = Blind_Security_Info/AddInfoViewController.xib; sourceTree = "<group>"; };
+		0440E2F41F9491FB004F01AC /* OnlineInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineInfos.swift; sourceTree = "<group>"; };
 		04695B711F610D9000345F4D /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstViewController.swift; path = Blind_Security_Info/FirstViewController.swift; sourceTree = "<group>"; };
 		04695B721F610D9000345F4D /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstViewController.xib; path = Blind_Security_Info/FirstViewController.xib; sourceTree = "<group>"; };
 		04695B751F610DBD00345F4D /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = Blind_Security_Info/SecondViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		040B36B51F610ACB0000996D = {
 			isa = PBXGroup;
 			children = (
+				0440E2F41F9491FB004F01AC /* OnlineInfos.swift */,
 				04F8D2C91F8671CC00F83C2F /* sound0.mp3 */,
 				04F8D2C31F86700C00F83C2F /* sound2.mp3 */,
 				04F8D2C41F86700C00F83C2F /* sound1.mp3 */,
@@ -291,6 +294,7 @@
 			files = (
 				047B289D1F6B6CA1008A7151 /* CustomTableViewCell.swift in Sources */,
 				046F5CC61F80E6FF00AA02AA /* ForthViewController.swift in Sources */,
+				0440E2F51F9491FB004F01AC /* OnlineInfos.swift in Sources */,
 				040B36C41F610ACB0000996D /* ViewController.swift in Sources */,
 				040B36CA1F610ACB0000996D /* Blind_Security_Info.xcdatamodeld in Sources */,
 				04308C7E1F61213B0058A40E /* AddInfoViewController.swift in Sources */,

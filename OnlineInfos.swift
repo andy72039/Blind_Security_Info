@@ -1,8 +1,8 @@
 //
-//  SecurityInfos.swift
+//  OnlineInfos.swift
 //  Blind_Security_Info
 //
-//  Created by Nick on 05/09/2017.
+//  Created by Nick on 16/10/2017.
 //  Copyright © 2017 Nick. All rights reserved.
 //
 
@@ -10,13 +10,13 @@ import UIKit
 import Foundation
 import CoreData
 
-class SecurityInfos {
-    static let sharedInstance = SecurityInfos()
+class OnlineInfos {
+    static let sharedInstance = OnlineInfos()
     let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
-    var infos = [SecurityInfo]()
+    var infos = [OnlineInfo]()
     
     func addInfo(latitude:Double, longitude:Double, infoTitle:String, infoContent:String, securityLevel: Int) {
-        let si = SecurityInfo(context:context)
+        let si = OnlineInfo(context:context)
         
         si.latitude = latitude
         si.longitude = longitude
@@ -29,20 +29,20 @@ class SecurityInfos {
         print("Save successful!")
     }
     
-    func getAllInfo() -> [SecurityInfo] {
+    func getAllInfo() -> [OnlineInfo] {
         do {
-            infos =  try context.fetch(SecurityInfo.fetchRequest())
+            infos =  try context.fetch(OnlineInfo.fetchRequest())
         } catch {
             print("Error fetching datafrom CoreData")
         }
         
         return infos
     }
-
+    
     func editInfo(infoID: NSManagedObjectID, infoTitle: String, infoContent: String, securityLevel: Int) {
         do {
-            infos =  try context.fetch(SecurityInfo.fetchRequest())
-
+            infos =  try context.fetch(OnlineInfo.fetchRequest())
+            
             for info in infos {
                 if info.objectID == infoID {
                     info.infoTitle = infoTitle
@@ -56,10 +56,10 @@ class SecurityInfos {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
     }
-
+    
     func deleteInfo(infoID: NSManagedObjectID) {
         do {
-            infos =  try context.fetch(SecurityInfo.fetchRequest())
+            infos =  try context.fetch(OnlineInfo.fetchRequest())
             for info in infos {
                 if info.objectID == infoID {
                     context.delete(info)
@@ -70,5 +70,4 @@ class SecurityInfos {
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
-
 }

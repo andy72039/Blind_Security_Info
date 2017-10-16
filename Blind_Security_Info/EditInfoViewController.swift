@@ -38,7 +38,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
     func saveButtonPressed() {
-        SecurityInfos.sharedinstance.editInfo(infoID: infoID, infoTitle: titleTextField.text!, infoContent: contentTextField.text!, securityLevel: securityLevel)
+        SecurityInfos.sharedInstance.editInfo(infoID: infoID, infoTitle: titleTextField.text!, infoContent: contentTextField.text!, securityLevel: securityLevel)
         dismiss(animated: true, completion: nil)
     }
     
@@ -48,7 +48,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
     func deleteButtonPressed() {
-        SecurityInfos.sharedinstance.deleteInfo(infoID: infoID)
+        SecurityInfos.sharedInstance.deleteInfo(infoID: infoID)
         dismiss(animated: false, completion: nil)
     }
 

@@ -12,26 +12,35 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
     var myTableView: UITableView! = UITableView()
+    var addButton: UIButton! = UIButton()
     
-    var infos = [SecurityInfo]()
-    var infoTitleArray: NSMutableArray! = NSMutableArray()
-    var infoContentArray: NSMutableArray! = NSMutableArray()
-    var IDArray: NSMutableArray! = NSMutableArray()
+    var infos = [OnlineInfo]()
     let sections = [""]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        infoTitleArray.add(from: "My Home")
-        infoContentArray.add(from: "My Home")
-
         setupView()
+        //        getInfoData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        getInfoData()
+    }
+    
+    func addButtonPressed() {
+        for row in myTableView.indexPathsForSelectedRows! {
+            let securityLevel = Int(infos[row.last!].securityLevel)
+            SecurityInfos.sharedInstance.addInfo(latitude: infos[row.last!].latitude, longitude: infos[row.last!].longitude, infoTitle: infos[row.last!].infoTitle!, infoContent: infos[row.last!].infoContent!, securityLevel: securityLevel)
+            OnlineInfos.sharedInstance.deleteInfo(infoID: infos[row.last!].objectID)
+        }
+        getInfoData()
+    }
+
     override func updateViewConstraints() {
         headerViewConstraints()
         titleLabelConstraints()
+        addButtonConstraints()
         myTableViewConstraints()
-
         super.updateViewConstraints()
     }
     
@@ -73,6 +82,37 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             toItem: view,
             attribute: .height,
             multiplier: 0.2,
+            constant: 0.0)
+            .isActive = true
+    }
+    func addButtonConstraints() {
+        NSLayoutConstraint(
+            item: addButton,
+            attribute: .right,
+            relatedBy: .equal,
+            toItem: headerView,
+            attribute: .right,
+            multiplier: 1.0,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: addButton,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: headerView,
+            attribute: .width,
+            multiplier: 0.3,
+            constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: addButton,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: headerView,
+            attribute: .centerY,
+            multiplier: 1.0,
             constant: 0.0)
             .isActive = true
     }
@@ -152,22 +192,25 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return infoContentArray.count
+        return infos.count
     }
     
     // return cells
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ServerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         
         if indexPath.section == 0 {
-            cell.labelOne.text = "\(infoContentArray[indexPath.row])"
-            cell.labelTwo.text = "\(infoTitleArray[indexPath.row])"
+            cell.labelOne.text = "\(infos[indexPath.row].infoContent!)"
+            cell.labelTwo.text = "\(infos[indexPath.row].infoTitle!)"
             //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
         }
         return cell
     }
     
+    // Session
+    //
+    //
     
     // return the number of sections
     func numberOfSections(in tableView: UITableView) -> Int{
@@ -180,13 +223,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        myTableView.deselectRow(at: indexPath, animated: false)
-        let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
-        nextViewController.infoTitle = infos[indexPath.row].infoTitle!
-        nextViewController.infoContent = infos[indexPath.row].infoContent!
-        nextViewController.securityLevel = Int(infos[indexPath.row].securityLevel)
-        nextViewController.infoID = infos[indexPath.row].objectID
-        self.present(nextViewController, animated: false, completion: nil)
+//        myTableView.deselectRow(at: indexPath, animated: false)
+//        let nextViewController = EditInfoViewController(nibName: "EditInfoViewController", bundle: nil)
+//        nextViewController.infoTitle = infos[indexPath.row].infoTitle!
+//        nextViewController.infoContent = infos[indexPath.row].infoContent!
+//        nextViewController.securityLevel = Int(infos[indexPath.row].securityLevel)
+//        nextViewController.infoID = infos[indexPath.row].objectID
+//        self.present(nextViewController, animated: false, completion: nil)
     }
     
     func setupView() {
@@ -194,8 +237,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         headerView.backgroundColor = UIColor.red
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Share Infos"
+        titleLabel.text = "Online Info"
         titleLabel.textAlignment = .center
+        
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.addTarget(self, action:#selector(addButtonPressed), for: .touchUpInside)
+        addButton.setTitle("Add", for: .normal)
+        addButton.backgroundColor = UIColor.blue
         
         myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name
         myTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -203,12 +251,17 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         myTableView.delegate = self
         myTableView.rowHeight = UITableViewAutomaticDimension
         myTableView.estimatedRowHeight = 44
-        myTableView.allowsSelection = true
+        myTableView.allowsMultipleSelection = true
         
         self.view.addSubview(headerView)
         self.view.addSubview(myTableView)
         headerView.addSubview(titleLabel)
+        headerView.addSubview(addButton)
         self.view.setNeedsUpdateConstraints()
-        
+    }
+    
+    func getInfoData() {
+        infos = OnlineInfos.sharedInstance.getAllInfo()
+        myTableView.reloadData()
     }
 }

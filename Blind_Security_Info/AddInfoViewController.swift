@@ -36,7 +36,9 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     func saveButtonPressed() {
         if !(contentTextField.text?.isEmpty)! {
-            SecurityInfos.sharedinstance.addInfo(latitude: lat, longitude: lon, infoTitle: titleTextField.text!, infoContent: contentTextField.text!, securityLevel: securityLevel)
+            SecurityInfos.sharedInstance.addInfo(latitude: lat, longitude: lon, infoTitle: titleTextField.text!, infoContent: contentTextField.text!, securityLevel: securityLevel)
+            OnlineInfos.sharedInstance.addInfo(latitude: lat, longitude: lon, infoTitle: titleTextField.text!, infoContent: contentTextField.text!, securityLevel: securityLevel)
+            
             dismiss(animated: false, completion: nil)
         }
     }

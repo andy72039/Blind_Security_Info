@@ -53,7 +53,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewWillAppear(_ animated: Bool) {
         locationManager.startUpdatingLocation()
-        infos = SecurityInfos.sharedinstance.getAllInfo()
+        infos = SecurityInfos.sharedInstance.getAllInfo()
     }
     override func viewWillDisappear(_ animated: Bool) {
         locationManager.stopUpdatingLocation()
@@ -229,7 +229,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             relatedBy: .equal,
             toItem: headerView,
             attribute: .width,
-            multiplier: 0.2,
+            multiplier: 0.3,
             constant: 0.0)
             .isActive = true
         

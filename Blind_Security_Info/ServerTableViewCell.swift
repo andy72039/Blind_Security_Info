@@ -43,13 +43,13 @@ class ServerTableViewCell: UITableViewCell {
         
         // Vertical
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[lbOne(20)]", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[lbThree]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[addBtn]-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[lbOne]-[lbTwo]-|", options: [], metrics: nil, views: viewsDict))
         
         // Horizonal
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[lbOne]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[lbTwo]-[lbThree]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[addbtn]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[lbTwo]-[addBtn]-|", options: [], metrics: nil, views: viewsDict))
+//        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[addbtn]-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -10,16 +10,12 @@ import UIKit
 import CoreData
 
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     static let sharedInstance = SecondViewController()
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
     var myTableView: UITableView! = UITableView()
 
     var infos = [SecurityInfo]()
-    var infoTitleArray: NSMutableArray! = NSMutableArray()
-    var infoContentArray: NSMutableArray! = NSMutableArray()
-    var IDArray: NSMutableArray! = NSMutableArray()
     let sections = [""]
 
     override func viewDidLoad() {
@@ -156,7 +152,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return infoContentArray.count
+            return infos.count
     }
 
     // return cells
@@ -165,8 +161,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         
         if indexPath.section == 0 {
-            cell.labelOne.text = "\(infoContentArray[indexPath.row])"
-            cell.labelTwo.text = "\(infoTitleArray[indexPath.row])"
+            cell.labelOne.text = "\(infos[indexPath.row].infoContent!)"
+            cell.labelTwo.text = "\(infos[indexPath.row].infoTitle!)"
             //            cell.labelThree.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .short, timeStyle: .short)
         }
         return cell
@@ -220,15 +216,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func getInfoData() {
-        infos = SecurityInfos.sharedinstance.getAllInfo()
-        infoContentArray.removeAllObjects()
-        infoTitleArray.removeAllObjects()
-        IDArray.removeAllObjects()
-        for si in infos {
-            infoContentArray.add(from: si.infoContent)
-            infoTitleArray.add(from: si.infoTitle)
-            IDArray.add(si.objectID)
-        }
+        infos = SecurityInfos.sharedInstance.getAllInfo()
         myTableView.reloadData()
     }
 }
