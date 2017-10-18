@@ -291,7 +291,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
             relatedBy: .equal,
             toItem: self.view,
             attribute: .width,
-            multiplier: 1.0,
+            multiplier: 0.6,
             constant: 0.0
             )
             .isActive = true
@@ -300,10 +300,10 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
             item: myPickerView,
             attribute: .top,
             relatedBy: .equal,
-            toItem: self.view,
+            toItem: contentTextField,
             attribute: .centerY,
-            multiplier: 1.6,
-            constant: 0.0)
+            multiplier: 1.0,
+            constant: 2.0)
             .isActive = true
     }
     

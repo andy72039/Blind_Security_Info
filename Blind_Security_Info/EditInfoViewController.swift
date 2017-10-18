@@ -300,12 +300,12 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             .isActive = true
         NSLayoutConstraint(
             item: deleteButton,
-            attribute: .centerY,
+            attribute: .top,
             relatedBy: .equal,
-            toItem: self.view,
-            attribute: .centerY,
-            multiplier: 1.6,
-            constant: 0.0)
+            toItem: myPickerView,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 2.0)
             .isActive = true
     }
 
@@ -326,7 +326,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             relatedBy: .equal,
             toItem: self.view,
             attribute: .width,
-            multiplier: 1.0,
+            multiplier: 0.6,
             constant: 0.0
             )
             .isActive = true
@@ -335,10 +335,10 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             item: myPickerView,
             attribute: .top,
             relatedBy: .equal,
-            toItem: self.view,
-            attribute: .centerY,
-            multiplier: 1.4,
-            constant: 0.0)
+            toItem: contentTextField,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 1.0)
             .isActive = true
     }
     
