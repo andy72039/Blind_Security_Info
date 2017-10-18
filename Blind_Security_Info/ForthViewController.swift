@@ -11,9 +11,12 @@ import UIKit
 class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var headerView: UIView! = UIView()
     var titleLabel: UILabel! = UILabel()
-    var myPickerView: UIPickerView! = UIPickerView()
+    var voicePickerView: UIPickerView! = UIPickerView()
+    var levelPickerView: UIPickerView! = UIPickerView()
+    
     
     let infoLevel = ["low", "medium", "High"]
+    let voice = ["On", "Off"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,8 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     override func updateViewConstraints() {
         headerViewConstraints()
         titleLabelConstraints()
-        myPickerViewConstraints()
+        voicePickerViewConstraints()
+        levelPickerViewConstraints()
         super.updateViewConstraints()
     }
     
@@ -105,9 +109,9 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             .isActive = true
     }
     
-    func myPickerViewConstraints() {
+    func voicePickerViewConstraints() {
         NSLayoutConstraint(
-            item: myPickerView,
+            item: voicePickerView,
             attribute: .centerX,
             relatedBy: .equal,
             toItem: self.view,
@@ -117,24 +121,57 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             .isActive = true
         
         NSLayoutConstraint(
-            item: myPickerView,
+            item: voicePickerView,
             attribute: .width,
             relatedBy: .equal,
             toItem: self.view,
             attribute: .width,
-            multiplier: 1.0,
+            multiplier: 0.5,
             constant: 0.0
             )
             .isActive = true
         
         NSLayoutConstraint(
-            item: myPickerView,
+            item: voicePickerView,
             attribute: .top,
             relatedBy: .equal,
             toItem: headerView,
             attribute: .bottom,
             multiplier: 1.0,
+            constant: 2.0)
+            .isActive = true
+    }
+
+    func levelPickerViewConstraints() {
+        NSLayoutConstraint(
+            item: levelPickerView,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .centerX,
+            multiplier: 1.0,
             constant: 0.0)
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: levelPickerView,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: self.view,
+            attribute: .width,
+            multiplier: 0.5,
+            constant: 0.0
+            )
+            .isActive = true
+        
+        NSLayoutConstraint(
+            item: levelPickerView,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: voicePickerView,
+            attribute: .bottom,
+            multiplier: 1.0,
+            constant: 2.0)
             .isActive = true
     }
 
@@ -143,17 +180,34 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return infoLevel.count
+        if pickerView.tag == 1 {
+            return voice.count
+        } else {
+            return infoLevel.count
+        }
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return infoLevel[row]
+        if pickerView.tag == 1 {
+            return voice[row]
+        } else {
+            return infoLevel[row]
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView.tag == 1 {
+            if row == 0 {
+                print("pickerview changed)")
+//                FirstViewController.sharedInstance.setVoice(voiceOn: true)
+                FirstViewController.sharedInstance.voiceOn = true
+            } else {
+//                FirstViewController.sharedInstance.setVoice(voiceOn: false)
+                FirstViewController.sharedInstance.voiceOn = false
+            }
+        }
     }
 
-    
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
@@ -161,15 +215,20 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Settings"
         titleLabel.textAlignment = .center
-        
-myPickerView.delegate = self
-        myPickerView.dataSource = self
-        myPickerView.translatesAutoresizingMaskIntoConstraints = false
-        
 
-        
+        voicePickerView.delegate = self
+        voicePickerView.dataSource = self
+        voicePickerView.translatesAutoresizingMaskIntoConstraints = false
+        voicePickerView.tag = 1
+
+        levelPickerView.delegate = self
+        levelPickerView.dataSource = self
+        levelPickerView.translatesAutoresizingMaskIntoConstraints = false
+        levelPickerView.tag = 2
+
         self.view.addSubview(headerView)
-        self.view.addSubview(myPickerView)
+        self.view.addSubview(voicePickerView)
+        self.view.addSubview(levelPickerView)
         headerView.addSubview(titleLabel)
         
         self.view.setNeedsUpdateConstraints()

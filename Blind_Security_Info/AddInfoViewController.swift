@@ -321,7 +321,6 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
        securityLevel = row
-        print(row)
     }
     
 

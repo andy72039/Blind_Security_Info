@@ -11,6 +11,7 @@ import CoreData
 import AVFoundation
 
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    static var sharedInstance = FirstViewController()
     var locationManager: CLLocationManager = CLLocationManager()
 //    var currLat: double = 0.0
 //    var currLon: double = 0.0
@@ -30,6 +31,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 
     let synth = AVSpeechSynthesizer()
     var myUtterance = AVSpeechUtterance(string: "")
+    var voiceOn: Bool = true
 
     var player0: AVAudioPlayer!
     var player1: AVAudioPlayer!
@@ -340,7 +342,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     }
 
                     myUtterance = AVSpeechUtterance(string: String(describing: si.infoContent!))
-                    synth.speak(myUtterance)
+                    if voiceOn {
+                        synth.speak(myUtterance)
+                    }
                 }
             }
             else {
@@ -354,6 +358,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         myTableView.reloadData()
     }
 
+    func setVoice(voiceOn: Bool) {
+        self.voiceOn = voiceOn
+    }
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
