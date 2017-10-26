@@ -31,8 +31,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 
     let synth = AVSpeechSynthesizer()
     var myUtterance = AVSpeechUtterance(string: "")
-    var voiceOn: Bool = true
-
+    var voiceOn: Bool!
+    
     var player0: AVAudioPlayer!
     var player1: AVAudioPlayer!
     var player2: AVAudioPlayer!
@@ -56,6 +56,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         locationManager.startUpdatingLocation()
         infos = SecurityInfos.sharedInstance.getAllInfo()
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
+        myUtterance.rate = 0.4
     }
     override func viewWillDisappear(_ animated: Bool) {
         locationManager.stopUpdatingLocation()
@@ -323,8 +325,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let long:Double = round(10000*coordinate.longitude)/10000
 //        infoArray.removeAllObjects()
 //        IDArray
-        myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
-        myUtterance.rate = 0.4
+        var settingVC: ForthViewController = ForthViewController(nibName: "ForthViewController", bundle: nil)
+//        print("settingVC.voiceOn = \(settingVC.voiceOn)")
         for si in infos {
             if lat == si.latitude && long == si.longitude {
                 if IDArray.contains(si.objectID) {
@@ -342,7 +344,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     }
 
                     myUtterance = AVSpeechUtterance(string: String(describing: si.infoContent!))
-                    if voiceOn {
+                    let settingVCVoiceOn = settingVC.getVoiceOn()
+                    if settingVCVoiceOn == true {
                         synth.speak(myUtterance)
                     }
                 }
@@ -351,31 +354,26 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 if IDArray.contains(si.objectID) {
                     infoArray.remove(si.infoContent)
                     IDArray.remove(si.objectID)
-//                    print("remove")
                 }
             }
         }
         myTableView.reloadData()
     }
 
-    func setVoice(voiceOn: Bool) {
-        self.voiceOn = voiceOn
-    }
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
         
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.addTarget(self, action:#selector(addButtonPressed), for: .touchUpInside)
-        addButton.setTitle("Add Info", for: .normal)
+        addButton.setTitle("新增資訊", for: .normal)
         addButton.backgroundColor = UIColor.blue
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Navigation"
+        titleLabel.text = "導航"
         titleLabel.textAlignment = .center
 
         addrLabel.translatesAutoresizingMaskIntoConstraints = false
-        //        addrLabel.text = "A"
         addrLabel.textAlignment = .center
 
         myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name

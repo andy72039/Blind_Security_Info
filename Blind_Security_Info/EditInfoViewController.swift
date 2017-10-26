@@ -25,7 +25,7 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     var deleteButton: UIButton! = UIButton()
     var myPickerView: UIPickerView! = UIPickerView()
     
-    let infoLevel = ["low", "medium", "High"]
+    let infoLevel = ["危險資訊", "引導資訊", "其它資訊"]
     var securityLevel = 0
 
     convenience init() {
@@ -378,21 +378,21 @@ class EditInfoViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action:#selector(saveButtonPressed), for: .touchUpInside)
-        saveButton.setTitle("Save Info", for: .normal)
+        saveButton.setTitle("儲存", for: .normal)
         saveButton.backgroundColor = UIColor.blue
         
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action:#selector(cancelButtonPressed), for: .touchUpInside)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle("取消", for: .normal)
         cancelButton.backgroundColor = UIColor.blue
         
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.addTarget(self, action:#selector(deleteButtonPressed), for: .touchUpInside)
-        deleteButton.setTitle("Delete This Info", for: .normal)
+        deleteButton.setTitle("刪除此資訊", for: .normal)
         deleteButton.backgroundColor = UIColor.blue
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Edit Your Info"
+        titleLabel.text = "編輯資訊"
         titleLabel.textAlignment = .center
 
         

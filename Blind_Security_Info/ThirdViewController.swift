@@ -237,12 +237,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         headerView.backgroundColor = UIColor.red
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Online Info"
+        titleLabel.text = "資訊共享"
         titleLabel.textAlignment = .center
         
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.addTarget(self, action:#selector(addButtonPressed), for: .touchUpInside)
-        addButton.setTitle("Add", for: .normal)
+        addButton.setTitle("取得", for: .normal)
         addButton.backgroundColor = UIColor.blue
         
         myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")         // register cell name

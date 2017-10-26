@@ -197,7 +197,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         headerView.backgroundColor = UIColor.red
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "My All Info"
+        titleLabel.text = "我的資訊"
         titleLabel.textAlignment = .center
         
 //        myTableView = UITableView()

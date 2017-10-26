@@ -21,7 +21,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
     var titleLabel: UILabel! = UILabel()
     var myPickerView: UIPickerView! = UIPickerView()
 
-    let infoLevel = ["low", "medium", "High"]
+    let infoLevel = ["危險資訊", "引導資訊", "其它資訊"]
     var securityLevel = 0
 
     convenience init() {
@@ -341,16 +341,16 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
 
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action:#selector(saveButtonPressed), for: .touchUpInside)
-        saveButton.setTitle("Save Info", for: .normal)
+        saveButton.setTitle("儲存", for: .normal)
         saveButton.backgroundColor = UIColor.blue
 
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action:#selector(cancelButtonPressed), for: .touchUpInside)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle("取消", for: .normal)
         cancelButton.backgroundColor = UIColor.blue
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Add Your Info"
+titleLabel.text = "新增個人資訊"
         titleLabel.textAlignment = .center
 
         myPickerView.delegate = self

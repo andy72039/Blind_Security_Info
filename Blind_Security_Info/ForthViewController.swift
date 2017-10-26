@@ -13,18 +13,25 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var titleLabel: UILabel! = UILabel()
     var voicePickerView: UIPickerView! = UIPickerView()
     var levelPickerView: UIPickerView! = UIPickerView()
-    
-    
-    let infoLevel = ["low", "medium", "High"]
+
+    let infoLevel = ["危險資訊", "引導資訊", "其它資訊"]
     let voice = ["On", "Off"]
+
+//    var firstVC: FirstViewController = FirstViewController(nibName: "FirstViewController", bundle: nil)
+    var voiceOn: Bool! = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.performSegue(withIdentifier: "Indentifier", sender: nil)
         setupView()
     }
-    
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let vc = segue.destination as! FirstViewController
+//        vc.voiceOn = voiceOn
+//    }
     func switchChanged(sender: UISwitch!) {
-        
+    
     }
     
     override func updateViewConstraints() {
@@ -200,20 +207,30 @@ class ForthViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             if row == 0 {
                 print("pickerview changed)")
 //                FirstViewController.sharedInstance.setVoice(voiceOn: true)
-                FirstViewController.sharedInstance.voiceOn = true
+//                FirstViewController.sharedInstance.voiceOn = true
+//                firstVC.voiceOn = true
+                voiceOn = true;
             } else {
 //                FirstViewController.sharedInstance.setVoice(voiceOn: false)
-                FirstViewController.sharedInstance.voiceOn = false
+//                FirstViewController.sharedInstance.voiceOn = false
+                print("voice off")
+//                firstVC.voiceOn = false
+                voiceOn = false
             }
         }
     }
 
+    public func getVoiceOn() -> Bool {
+        print("return voiceOn = \(voiceOn)")
+        return voiceOn!
+    }
+    
     func setupView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = UIColor.red
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Settings"
+        titleLabel.text = "設定"
         titleLabel.textAlignment = .center
 
         voicePickerView.delegate = self

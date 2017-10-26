@@ -36,10 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [firstViewController!, secondViewController!, thirdViewController!, forthViewController!]
         
-        let item1 = UITabBarItem(title: "Navigation", image: nil, tag: 0)
-        let item2 = UITabBarItem(title: "Info", image: nil, tag: 1)
-        let item3 = UITabBarItem(title: "Online", image: nil, tag: 2)
-        let item4 = UITabBarItem(title: "Settings", image: nil, tag: 2)
+        let item1 = UITabBarItem(title: "導航", image: nil, tag: 0)
+        let item2 = UITabBarItem(title: "我的資訊", image: nil, tag: 1)
+        let item3 = UITabBarItem(title: "資訊共享", image: nil, tag: 2)
+        let item4 = UITabBarItem(title: "設定", image: nil, tag: 2)
         
         //defining the items of the TabBar corresponding to three views
         self.firstViewController?.tabBarItem = item1
@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //setting the initial VieController as tabBarController
         self.window?.makeKeyAndVisible()
         
+        tabBarController.viewControllers?.forEach { $0.view }
         return true
     }
     
