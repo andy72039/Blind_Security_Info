@@ -56,6 +56,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         locationManager.startUpdatingLocation()
         infos = SecurityInfos.sharedInstance.getAllInfo()
+        IDArray.removeAllObjects()
+        infoArray.removeAllObjects()
         myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
         myUtterance.rate = 0.4
     }
@@ -330,7 +332,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         for si in infos {
             if lat == si.latitude && long == si.longitude {
                 if IDArray.contains(si.objectID) {
-                    print("exist)")
+//                    print("exist)")
                     continue
                 }
                 else {

@@ -171,7 +171,7 @@ class AddInfoViewController: UIViewController, UITextFieldDelegate, UIPickerView
             relatedBy: .equal,
             toItem: self.view,
             attribute: .centerY,
-            multiplier: 1.2,
+            multiplier: 1.0,
             constant: 0.0)
             .isActive = true
     }
